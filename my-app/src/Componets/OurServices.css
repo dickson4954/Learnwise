@@ -1,0 +1,71 @@
+.our-services {
+    padding: 60px 10%;
+    background-color: #f9f9f9;
+  }
+  
+  .our-services-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #222;
+    border-left: 4px solid #007bff;
+    padding-left: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  
+  .content {
+    display: flex;
+    align-items: flex-start; /* Aligns content properly */
+    gap: 40px; /* Increases space between image and services */
+  }
+  
+  
+  .image-container {
+    flex: 1;
+  }
+  
+  .services-image {
+    width: 100%;
+    height: auto; /* Let the image keep its natural aspect ratio */
+    max-height: 600px; /* Adjust based on how tall you want it */
+    object-fit: cover;
+  }
+  
+  
+  .services-list {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding-left: 40px;
+  }
+  
+  .service-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .service-card h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #222;
+  }
+  
+  .service-card p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
