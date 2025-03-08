@@ -58,11 +58,11 @@
 }
 .navbar-right {
     display: flex;
-    align-items: center;
+    align-items: center; /* Ensures all elements are aligned */
     gap: 15px;
+    height: 100%; /* Matches navbar height */
 }
 
-/* Order Now Button */
 .order-button {
     background-color: #0099cc;
     color: white;
@@ -76,7 +76,9 @@
     justify-content: center;
     height: 40px; /* Match navbar height */
     line-height: normal;
-    margin-top: -3px; /* Adjust positioning */
+    margin: 0; /* Remove unnecessary margin */
+    position: relative;
+    top: 2px; /* Move button slightly up */
 }
 
 .order-button:hover {

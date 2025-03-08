@@ -1,109 +1,100 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
-import './login.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./login.css";
 
 const LoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({ fullName: '', username: '', email: '', password: '' });
-  const [errors, setErrors] = useState('');
-  const [success, setSuccess] = useState('');
-  const navigate = useNavigate();  // Initialize navigate
+  const [formData, setFormData] = useState({
+    fullName: "",
+    username: "",
+    email: "",
+    password: "",
+  });
+  const [message, setMessage] = useState({ type: "", text: "" });
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
-    setErrors('');
-    setSuccess('');
+    setMessage({ type: "", text: "" });
   };
 
   const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const validateForm = () => {
     if (!formData.username || !formData.password || (!isLogin && (!formData.fullName || !formData.email))) {
-      return 'Please fill in all required fields.';
+      return "Please fill in all required fields.";
     }
     if (!isLogin && !/\S+@\S+\.\S+/.test(formData.email)) {
-      return 'Invalid email address.';
+      return "Invalid email address.";
     }
-    return '';
+    return "";
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const error = validateForm();
     if (error) {
-      setErrors(error);
+      setMessage({ type: "error", text: error });
       return;
     }
-
-    const url = isLogin ? 'http://127.0.0.1:5000/login' : 'http://127.0.0.1:5000/signup';
+  
+    setLoading(true);
+  
+    // ✅ FIXED API URLs
+    const url = isLogin
+      ? "http://127.0.0.1:5000/auth/login"
+      : "http://127.0.0.1:5000/auth/signup";
+  
+    // ✅ FIXED REQUEST BODY
     const requestData = isLogin
-      ? { username: formData.username, password: formData.password }
-      : { username: formData.username, email: formData.email, password: formData.password };
-
+      ? { username: formData.username, password: formData.password } // Changed "identifier" to "username"
+      : {
+          fullName: formData.fullName,
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        };
+  
     try {
       const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include", // Important for JWT authentication
         body: JSON.stringify(requestData),
       });
+  
       const result = await response.json();
-
+      setLoading(false);
+  
       if (response.ok) {
-        setSuccess(isLogin ? 'Login successful!' : 'Registration successful!');
-        setErrors('');
-
-        // Navigate to /admin/dashboard on successful login
+        setMessage({ type: "success", text: isLogin ? "Login successful!" : "Registration successful!" });
+  
         if (isLogin) {
-          navigate('/admin');  
+          localStorage.setItem("token", result.access_token);
+          setTimeout(() => navigate("/admin"), 1000);
         }
       } else {
-        setErrors(result.message || 'An error occurred. Please try again.');
+        setMessage({ type: "error", text: result.message || "An error occurred. Please try again." });
       }
     } catch (error) {
-      setErrors('Failed to connect to server.');
+      setLoading(false);
+      setMessage({ type: "error", text: "Failed to connect to the server." });
     }
   };
+  
 
   return (
     <div className="page-container">
       <div className="login-page">
         <div className="form">
-          {isLogin ? (
-            <form className="login-form" onSubmit={handleSubmit}>
-              <h2><i className="fas fa-lock"></i> Login</h2>
-              {errors && <div className="error">{errors}</div>}
-              {success && <div className="success">{success}</div>}
-              <input
-                type="text"
-                placeholder="Username"
-                name="username"
-                value={formData.username}
-                onChange={handleInputChange}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-              />
-              <button type="submit">Login</button>
-              <p className="message">
-                Not registered? <button type="button" className="toggle-btn" onClick={toggleForm}>Create an account</button>
-              </p>
-            </form>
-          ) : (
-            <form className="register-form" onSubmit={handleSubmit}>
-              <h2><i className="fas fa-lock"></i> Register</h2>
-              {errors && <div className="error">{errors}</div>}
-              {success && <div className="success">{success}</div>}
+          <form className={isLogin ? "login-form" : "register-form"} onSubmit={handleSubmit}>
+            <h2>{isLogin ? "Login" : "Register"}</h2>
+            {message.text && <div className={`message ${message.type}`}>{message.text}</div>}
+
+            {!isLogin && (
               <input
                 type="text"
                 placeholder="Full Name *"
@@ -112,14 +103,16 @@ const LoginPage = () => {
                 onChange={handleInputChange}
                 required
               />
-              <input
-                type="text"
-                placeholder="Username *"
-                name="username"
-                value={formData.username}
-                onChange={handleInputChange}
-                required
-              />
+            )}
+            <input
+              type="text"
+              placeholder={isLogin ? "Username or Email *" : "Username *"}
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              required
+            />
+            {!isLogin && (
               <input
                 type="email"
                 placeholder="Email *"
@@ -128,20 +121,26 @@ const LoginPage = () => {
                 onChange={handleInputChange}
                 required
               />
-              <input
-                type="password"
-                placeholder="Password *"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-              />
-              <button type="submit">Create</button>
-              <p className="message">
-                Already registered? <button type="button" className="toggle-btn" onClick={toggleForm}>Sign In</button>
-              </p>
-            </form>
-          )}
+            )}
+            <input
+              type="password"
+              placeholder="Password *"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              required
+            />
+            <button type="submit" disabled={loading}>
+              {loading ? "Processing..." : isLogin ? "Login" : "Create Account"}
+            </button>
+
+            <p className="message">
+              {isLogin ? "Not registered? " : "Already registered? "}
+              <button type="button" className="toggle-btn" onClick={toggleForm}>
+                {isLogin ? "Create an account" : "Sign In"}
+              </button>
+            </p>
+          </form>
         </div>
       </div>
     </div>
