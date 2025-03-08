@@ -1,0 +1,89 @@
+.admin-dashboard {
+    font-family: Arial, sans-serif;
+  }
+  
+  .header-container {
+    position: relative;
+    height: 500px; /* Adjust height as needed */
+    overflow: hidden;
+  }
+  
+  .dashboard-header {
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+  }
+  
+  .header-content {
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: Adds a semi-transparent overlay */
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .dashboard-header h1 {
+    margin: 0;
+    font-size: 2.5em;
+  }
+  
+  .dashboard-header p {
+    margin: 5px 0;
+    font-size: 1.2em;
+  }
+  
+  .logout-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-project-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #138496;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+  }
+  
+  .customer-orders {
+    margin: 20px;
+  }
+  
+  .customer-orders table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .customer-orders th, .customer-orders td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .customer-orders th {
+    background-color: #f2f2f2;
+  }
+  
+  .view-button {
+    padding: 5px 10px;
+    background-color: #138496;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }

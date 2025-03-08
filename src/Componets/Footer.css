@@ -1,0 +1,130 @@
+/* Footer Styles */
+.footer {
+    background-color: #f2fbfd;
+    color: white;
+    padding: 30px 15px; /* Reduced padding */
+    font-family: Arial, sans-serif;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-width: 1000px; /* Reduced max-width */
+    margin: 0 auto;
+  }
+  
+  .footer-logo img {
+    max-width: 120px; /* Smaller logo */
+  }
+  
+  .footer-section {
+    flex: 1;
+    min-width: 180px;
+    margin-bottom: 15px; /* Reduced margin */
+  }
+  
+  .section-title {
+    font-size: 14px; /* Slightly smaller titles */
+    font-weight: bold;
+    color: #00aaff;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  
+  .footer-section p {
+    font-size: 13px; /* Smaller text */
+    line-height: 1.5;
+    margin: 0;
+
+  }
+  
+  .quick-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: black;
+  }
+  
+  .quick-links ul li {
+    margin-bottom: 5px; /* Less space between links */
+  }
+  
+  .quick-links ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+  }
+  
+  .quick-links ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Newsletter Section */
+  .newsletter-input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Less space between input and button */
+  }
+  
+  .newsletter-input input {
+    padding: 8px; /* Smaller input */
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+  }
+  
+  .newsletter-input button {
+    background-color: #00aaff;
+    color: white;
+    border: none;
+    padding: 8px; /* Smaller button */
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .newsletter-input button:hover {
+    background-color: #0088cc;
+  }
+  
+  /* Payment Methods */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 20px; /* Reduced space above */
+  }
+  
+  .payment-methods {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Reduced space between payment icons */
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  
+  .payment-item {
+    text-align: center;
+  }
+  
+  .payment-item img {
+    max-width: 60px; /* Smaller payment icons */
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .payment-item p {
+    margin-top: 3px; /* Less space under images */
+    font-size: 12px;
+    color: white;
+  }
+  
+  /* Copyright */
+  .copyright {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 10px; /* Less space above copyright */
+  }
+  

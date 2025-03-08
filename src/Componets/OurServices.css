@@ -1,0 +1,70 @@
+.our-services {
+  padding: 60px 10%;
+  background-color: #f9f9f9;
+}
+
+.our-services-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #222;
+  border-left: 4px solid #007bff;
+  padding-left: 10px;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.content {
+  display: flex;
+  gap: 40px; /* Space between image and services */
+}
+
+.image-container {
+  flex: 1; /* Takes up half the width */
+  max-height: 800px; /* Set a max height for the image */
+  overflow: hidden; /* Ensures the image doesn't overflow */
+  display: flex;
+  align-items: center; /* Centers the image vertically */
+  justify-content: center; /* Centers the image horizontally */
+}
+
+.services-image {
+  width: 100%;
+  height: 100%; /* Ensures the image fills the container */
+  object-fit: cover; /* Maintains aspect ratio */
+  border-radius: 10px; /* Optional: Adds rounded corners */
+}
+
+.services-list {
+  flex: 1; /* Takes up half the width */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns for services */
+  gap: 20px;
+}
+
+.service-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.service-card h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.service-card p {
+  font-size: 1rem;
+  color: #555;
+}

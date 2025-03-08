@@ -1,0 +1,25 @@
+.chat-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;  /* Change this from 'right' to 'left' */
+    background-color: #e3f2fd;
+    color: #007bff;
+    padding: 10px 15px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s;
+}
+
+.chat-button:hover {
+    background-color: #bbdefb;
+}
+
+.chat-button svg {
+    width: 20px;
+    height: 20px;
+}

@@ -1,0 +1,87 @@
+/* Navbar Styling */
+.navbar {
+    background-color: #ffffff; /* White background */
+    padding: 10px 0;
+    width: 100vw; /* Full width */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Stick to top */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Navbar Container */
+.navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%; /* Keep some margin from edges */
+    margin: 0 auto;
+}
+
+/* Logo */
+.logo {
+    width: 80px; /* Adjust logo size */
+    height: auto;
+}
+
+/* Centering Navbar Links */
+.navbar-collapse {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Navbar Items */
+.navbar-nav {
+    display: flex;
+    gap: 25px; /* More spacing */
+    align-items: center;
+}
+
+.navbar-nav .nav-item {
+    list-style: none;
+}
+
+/* Navbar Link Styling */
+.navbar-nav .nav-link {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    text-transform: capitalize;
+    transition: color 0.3s ease;
+    padding: 8px 12px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff; /* Highlight on hover */
+}
+
+/* Order Now Button */
+.order-button {
+    background-color: #17a2b8; /* Teal blue */
+    color: white;
+    padding: 0px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.order-button:hover {
+    background-color: #138496;
+}
+
+/* Responsive Styling */
+@media (max-width: 992px) {
+    .navbar-collapse {
+        justify-content: center;
+    }
+    
+    .navbar-nav {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}

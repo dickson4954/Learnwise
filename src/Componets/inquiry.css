@@ -1,0 +1,118 @@
+.inquiry-page {
+  width: 100vw; 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  text-align: center;
+  padding: 20px; 
+}
+
+.inquiry-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: white; 
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px; 
+  max-height: 80vh; 
+  overflow-y: auto; 
+}
+
+.inquiry-page h1 {
+  margin-bottom: 20px; 
+  color: #138496; 
+  font-size: 2rem; 
+}
+
+.inquiry-page form div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.inquiry-page form label {
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: bold; 
+}
+
+.inquiry-page form input,
+.inquiry-page form textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc; 
+  border-radius: 5px;
+  font-size: 1rem; 
+}
+
+.inquiry-page form textarea {
+  resize: vertical; 
+  min-height: 100px; 
+}
+
+.inquiry-page form button {
+  padding: 10px 20px;
+  background-color: #138496;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem; 
+}
+
+.inquiry-page form button:hover {
+  background-color: #138496;
+}
+.back-button {
+  position: absolute; 
+  top: 20px;
+  right: 20px; 
+  padding: 10px 20px;
+  background-color: #138496;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.back-button:hover {
+  background-color: #138486;
+}
+
+.budget-input-container {
+  margin-bottom: 1rem;
+}
+
+.budget-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.currency-dropdown {
+  padding: 0.5rem;
+  border: none;
+  background-color: #f0f0f0;
+  border-right: 1px solid #ccc;
+  outline: none;
+}
+
+.budget-input {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  outline: none;
+}
