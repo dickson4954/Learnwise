@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Link as ScrollLink } from "react-scroll"; // Import for smooth scrolling
+import { Link as ScrollLink } from "react-scroll";
+import LoginPage from "./admin/loginpage";
 import "./Navbar.css";
 
 function Navbar() {
+  const [showLoginForm, setShowLoginForm] = useState(false);
+
+  const toggleLoginForm = () => {
+    setShowLoginForm(!showLoginForm);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg fixed-top">
       <div className="container">
@@ -58,14 +65,26 @@ function Navbar() {
             <li className="nav-item">
               <Link className="nav-link" to="/contact">Contact</Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link className="nav-link" to="/admin">Admin</Link>
-            </li>
+            </li> */}
           </ul>
         </div>
 
         {/* Order Button */}
         <Link to="/inquiry" className="order-button">Order Now →</Link>
+
+        {/* Login Icon */}
+        <div className="login-icon" onClick={toggleLoginForm}>
+          <i className="fas fa-user"></i> {/* Font Awesome user icon */}
+        </div>
+
+        {/* Login Form Overlay */}
+        {showLoginForm && (
+          <div className="login-form-overlay">
+            <LoginPage />
+          </div>
+        )}
       </div>
     </nav>
   );
