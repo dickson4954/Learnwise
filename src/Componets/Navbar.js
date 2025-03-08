@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import LoginPage from "./admin/loginpage";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
 import "./Navbar.css";
 
 function Navbar() {
@@ -25,33 +27,17 @@ function Navbar() {
 
         {/* Navbar Items */}
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav mx-auto">
             <li className="nav-item">
               <Link className="nav-link" to="/">Home</Link>
             </li>
 
-            {/* Scroll to About Us */}
             <li className="nav-item">
-              <ScrollLink
-                className="nav-link"
-                to="about"
-                smooth={true}
-                duration={800}
-              >
-                About Us
-              </ScrollLink>
+              <ScrollLink className="nav-link" to="about" smooth={true} duration={800}>About Us</ScrollLink>
             </li>
 
-            {/* Scroll to Our Services */}
             <li className="nav-item">
-              <ScrollLink
-                className="nav-link"
-                to="services"
-                smooth={true}
-                duration={800}
-              >
-                Our Services
-              </ScrollLink>
+              <ScrollLink className="nav-link" to="services" smooth={true} duration={800}>Our Services</ScrollLink>
             </li>
 
             <li className="nav-item">
@@ -65,19 +51,20 @@ function Navbar() {
             <li className="nav-item">
               <Link className="nav-link" to="/contact">Contact</Link>
             </li>
-            {/* <li className="nav-item">
-              <Link className="nav-link" to="/admin">Admin</Link>
-            </li> */}
           </ul>
         </div>
 
-        {/* Order Button */}
-        <Link to="/inquiry" className="order-button">Order Now →</Link>
+     {/* Right Section: Order Button + Login Icon */}
+<div className="navbar-right">
+  {/* Order Now Button */}
+  <Link to="/inquiry" className="order-button">Order Now →</Link>
 
-        {/* Login Icon */}
-        <div className="login-icon" onClick={toggleLoginForm}>
-          <i className="fas fa-user"></i> {/* Font Awesome user icon */}
-        </div>
+  {/* Login Icon */}
+  <div className="login-button" onClick={toggleLoginForm}>
+    <i className="fas fa-user"></i>
+  </div>
+</div>
+
 
         {/* Login Form Overlay */}
         {showLoginForm && (
