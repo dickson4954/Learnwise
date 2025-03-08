@@ -59,7 +59,7 @@ const LoginPage = () => {
 
         // Navigate to /admin/dashboard on successful login
         if (isLogin) {
-          navigate('/admin/dashboard');  
+          navigate('/admin');  
         }
       } else {
         setErrors(result.message || 'An error occurred. Please try again.');
