@@ -34,7 +34,7 @@ function Inquiry() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const formDataToSend = new FormData();
     formDataToSend.append('name', formData.name);
     formDataToSend.append('email', formData.email);
@@ -42,34 +42,33 @@ function Inquiry() {
     formDataToSend.append('project_name', formData.projectName);
     formDataToSend.append('project_description', formData.projectDescription);
     formDataToSend.append('expected_duration', formData.expectedDuration);
-    formDataToSend.append('project_budget', `${formData.currency} ${formData.budget}`);
-
+    formDataToSend.append('project_budget', formData.budget); // Only the number
+    formDataToSend.append('currency', formData.currency); // Send currency separately
+  
     if (formData.file) {
       formDataToSend.append('file', formData.file);
     }
-
+  
     try {
       const response = await fetch('http://127.0.0.1:5000/orders', {
         method: 'POST',
         body: formDataToSend,
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to submit order');
       }
-
+  
       const data = await response.json();
       console.log('Order submitted:', data);
-
-      // Show success message with swal
+  
       Swal.fire({
         title: 'Order Submitted!',
         text: 'Your order has been placed successfully.',
         icon: 'success',
         confirmButtonText: 'OK'
       });
-
-      // Reset the form
+  
       setFormData({
         name: '',
         email: '',
@@ -81,11 +80,9 @@ function Inquiry() {
         budget: '',
         currency: 'USD'
       });
-
+  
     } catch (error) {
       console.error('Error submitting order:', error);
-
-      // Show error message with swal
       Swal.fire({
         title: 'Error!',
         text: 'Failed to submit order. Please try again.',
@@ -94,6 +91,7 @@ function Inquiry() {
       });
     }
   };
+  
 
   return (
     <div

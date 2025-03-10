@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Swal from 'sweetalert2';
-import './projectForm.css'; // Import CSS Module
+import './projectForm.css';
 
-function ProjectForm () {
+function ProjectForm({ addProject }) {
   const [projectName, setProjectName] = useState('');
-  const [inputType, setInputType] = useState('link'); // 'link' or 'file'
+  const [inputType, setInputType] = useState('link');
   const [link, setLink] = useState('');
   const [file, setFile] = useState(null);
   const [errors, setErrors] = useState({});
+  const fileInputRef = useRef(null);  // 👈 Create a ref for file input
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!addProject) {
+      console.error('addProject is not available in ProjectForm!');
+      Swal.fire({ icon: 'error', title: 'Error', text: 'addProject function is missing!' });
+      return;
+    }
 
     const newErrors = {};
     if (!projectName) newErrors.projectName = 'Project name is required';
@@ -22,25 +29,34 @@ function ProjectForm () {
       return;
     }
 
-    // Prepare payload based on input type
-    const payload = {
-      projectName,
-      [inputType === 'link' ? 'link' : 'file']: inputType === 'link' ? link : file,
-    };
+    const formData = new FormData();
+    formData.append("project_name", projectName);
+    
+    if (inputType === "link") {
+      formData.append("link_url", link);
+    } else if (inputType === "file" && file) {
+      formData.append("file", file);
+    }
 
-    try {
-      // Simulate API call
-      console.log('Submitting:', payload);
-      Swal.fire({ icon: 'success', title: 'Success!', text: 'Project submitted successfully.' });
-    } catch (error) {
-      console.error('Submission error:', error);
-      Swal.fire({ icon: 'error', title: 'Error', text: 'Failed to submit project.' });
+    addProject(formData); // Pass FormData to backend
+
+    Swal.fire({ icon: 'success', title: 'Success!', text: 'Project submitted successfully.' });
+
+    // Reset form inputs
+    setProjectName('');
+    setLink('');
+    setFile(null);
+    setErrors({});
+
+    // Reset file input using ref
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
   };
 
   return (
     <div className="formContainer">
-      <h2 className='h2'>Add Project</h2>
+      <h2 className="h2">Add Project</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -83,6 +99,7 @@ function ProjectForm () {
         ) : (
           <>
             <input
+              ref={fileInputRef}  // 👈 Attach the ref to file input
               type="file"
               onChange={(e) => {
                 setFile(e.target.files[0]);
@@ -98,6 +115,6 @@ function ProjectForm () {
       </form>
     </div>
   );
-};
+}
 
 export default ProjectForm;

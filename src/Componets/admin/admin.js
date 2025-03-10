@@ -6,14 +6,17 @@ import ProjectForm from './projectForm';
 function Admin() {
   const [showForm, setShowForm] = useState(false);
   const [orders, setOrders] = useState([]);
+  const [projects, setProjects] = useState([]); // Store projects from backend
   const [selectedOrder, setSelectedOrder] = useState(null);
   const navigate = useNavigate();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
 
   useEffect(() => {
     fetchOrders();
+    fetchProjects(); // Fetch projects when component mounts
   }, []);
 
+  // Fetch orders
   const fetchOrders = async () => {
     try {
       const response = await fetch('http://127.0.0.1:5000/orders', {
@@ -36,6 +39,28 @@ function Admin() {
     }
   };
 
+  // Fetch projects from backend
+  const fetchProjects = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/projects', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setProjects(data);
+      } else {
+        console.error('Failed to fetch projects');
+      }
+    } catch (error) {
+      console.error('Error fetching projects:', error);
+    }
+  };
+
   const toggleForm = () => {
     setShowForm((prev) => !prev);
   };
@@ -55,6 +80,39 @@ function Admin() {
     setSelectedOrder(null);
   };
 
+  const addProject = async (newProject) => {
+    try {
+      const formData = new FormData();
+      formData.append("project_name", newProject.project_name);
+      
+      if (newProject.link_url) {
+        formData.append("link_url", newProject.link_url);
+      }
+      
+      if (newProject.file) {
+        formData.append("file", newProject.file);
+      }
+  
+      const response = await fetch('http://127.0.0.1:5000/projects', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: formData  // ✅ Use FormData (no need for Content-Type)
+      });
+  
+      if (response.ok) {
+        console.log("Project added successfully!");
+        fetchProjects();  // ✅ Refresh project list after adding
+      } else {
+        const errorData = await response.json();
+        console.error("Failed to add project:", errorData.error);
+      }
+    } catch (error) {
+      console.error("Error adding project:", error);
+    }
+  };
+  
   return (
     <div className="admin-dashboard">
       <div className="header-container">
@@ -70,7 +128,29 @@ function Admin() {
       <button className="add-project-button" onClick={toggleForm}>
         {showForm ? 'Close Form' : 'Add Project'}
       </button>
-      {showForm && <ProjectForm />}
+      {showForm && <ProjectForm addProject={addProject} />}  {/* ✅ FIXED */}
+
+      {/* Display added projects */}
+     {/* Display added projects */}
+<div className="projects-list">
+  <h2>Added Projects</h2>
+  {projects.length > 0 ? (
+    projects.map((project, index) => (
+      <div key={index} className="project-card">
+        <h3>{project.project_name}</h3> {/* Show the project name */}
+
+        {project.file ? (  // Check if a file exists
+          <p>📁 {project.file.split('/').pop()}</p>  // Extract the filename
+        ) : (
+          <p>📎 No file uploaded</p>  // If no file, show a placeholder
+        )}
+      </div>
+    ))
+  ) : (
+    <p>No projects added yet.</p>
+  )}
+</div>
+
 
       <div className="customer-orders">
         <h2>Customer Orders</h2>
@@ -115,17 +195,17 @@ function Admin() {
             <p><strong>Budget:</strong> {selectedOrder.project_budget}</p>
 
             {selectedOrder.file_url && (
-  <p>
-    <strong>File:</strong>{' '}
-    <a 
-      href={selectedOrder.file_url.startsWith('http') ? selectedOrder.file_url : `http://127.0.0.1:5000/${selectedOrder.file_url}`} 
-      target="_blank" 
-      rel="noopener noreferrer"
-    >
-      Download File
-    </a>
-  </p>
-)}
+              <p>
+                <strong>File:</strong>{' '}
+                <a 
+                  href={selectedOrder.file_url.startsWith('http') ? selectedOrder.file_url : `http://127.0.0.1:5000/${selectedOrder.file_url}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  Download File
+                </a>
+              </p>
+            )}
 
             <button onClick={closeOrderModal} className="close-modal-button">Close</button>
           </div>
