@@ -40,40 +40,39 @@ const LoginPage = () => {
       setMessage({ type: "error", text: error });
       return;
     }
-  
+
     setLoading(true);
-  
-    // ✅ FIXED API URLs
+
     const url = isLogin
       ? "http://127.0.0.1:5000/auth/login"
       : "http://127.0.0.1:5000/auth/signup";
-  
-    // ✅ FIXED REQUEST BODY
+
     const requestData = isLogin
-      ? { username: formData.username, password: formData.password } // Changed "identifier" to "username"
+      ? { username: formData.username, password: formData.password }
       : {
           fullName: formData.fullName,
           username: formData.username,
           email: formData.email,
           password: formData.password,
         };
-  
+
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // Important for JWT authentication
+        credentials: "include",
         body: JSON.stringify(requestData),
       });
-  
+
       const result = await response.json();
       setLoading(false);
-  
+
       if (response.ok) {
         setMessage({ type: "success", text: isLogin ? "Login successful!" : "Registration successful!" });
-  
+
         if (isLogin) {
           localStorage.setItem("token", result.access_token);
+          localStorage.setItem("user", JSON.stringify(result.user));
           setTimeout(() => navigate("/admin"), 1000);
         }
       } else {
@@ -84,7 +83,6 @@ const LoginPage = () => {
       setMessage({ type: "error", text: "Failed to connect to the server." });
     }
   };
-  
 
   return (
     <div className="page-container">
