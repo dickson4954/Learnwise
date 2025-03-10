@@ -55,7 +55,14 @@ const ContactPage = () => {
             <h3>Follow us</h3>
             <div className="social-icons">
               <span className="icon">📷</span>
-              <span className="icon">👻</span>
+              <img 
+              src="https://i.pinimg.com/736x/4e/95/26/4e95267bcf1cc4ce078755e85e388add.jpg"
+              alt="Instagram Logo"
+              className=" instagram-logo"
+              style={{ height: '70px', width: '70px' }}
+
+              />
+
               <span className="icon">🔗</span>
             </div>
           </div>
