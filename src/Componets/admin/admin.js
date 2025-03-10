@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './admin.css';
 import { useNavigate } from 'react-router-dom';
 import ProjectForm from './projectForm';
+import Swal from 'sweetalert2'; // Import SweetAlert2
+
 
 function Admin() {
   const [showForm, setShowForm] = useState(false);
@@ -13,7 +15,7 @@ function Admin() {
 
   useEffect(() => {
     fetchOrders();
-    fetchProjects(); // Fetch projects when component mounts
+    // fetchProjects(); // Fetch projects when component mounts
   }, []);
 
   // Fetch orders
@@ -40,26 +42,26 @@ function Admin() {
   };
 
   // Fetch projects from backend
-  const fetchProjects = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:5000/projects', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
+  // const fetchProjects = async () => {
+  //   try {
+  //     const response = await fetch('http://127.0.0.1:5000/projects', {
+  //       method: 'GET',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
+  //       },
+  //     });
 
-      if (response.ok) {
-        const data = await response.json();
-        setProjects(data);
-      } else {
-        console.error('Failed to fetch projects');
-      }
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-    }
-  };
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setProjects(data);
+  //     } else {
+  //       console.error('Failed to fetch projects');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching projects:', error);
+  //   }
+  // };
 
   const toggleForm = () => {
     setShowForm((prev) => !prev);
@@ -80,36 +82,28 @@ function Admin() {
     setSelectedOrder(null);
   };
 
-  const addProject = async (newProject) => {
+  const addProject = async (formData) => {
     try {
-      const formData = new FormData();
-      formData.append("project_name", newProject.project_name);
-      
-      if (newProject.link_url) {
-        formData.append("link_url", newProject.link_url);
-      }
-      
-      if (newProject.file) {
-        formData.append("file", newProject.file);
-      }
-  
       const response = await fetch('http://127.0.0.1:5000/projects', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
-        body: formData  // ✅ Use FormData (no need for Content-Type)
+        body: formData, // Pass the FormData directly
       });
   
       if (response.ok) {
-        console.log("Project added successfully!");
-        fetchProjects();  // ✅ Refresh project list after adding
+        const data = await response.json();
+        console.log("Project added successfully:", data);
+        Swal.fire({ icon: 'success', title: 'Success!', text: 'Project added successfully.' });
       } else {
         const errorData = await response.json();
         console.error("Failed to add project:", errorData.error);
+        Swal.fire({ icon: 'error', title: 'Error', text: errorData.error || 'Failed to add project.' });
       }
     } catch (error) {
       console.error("Error adding project:", error);
+      Swal.fire({ icon: 'error', title: 'Error', text: 'An error occurred while adding the project.' });
     }
   };
   
@@ -132,24 +126,7 @@ function Admin() {
 
       {/* Display added projects */}
      {/* Display added projects */}
-<div className="projects-list">
-  <h2>Added Projects</h2>
-  {projects.length > 0 ? (
-    projects.map((project, index) => (
-      <div key={index} className="project-card">
-        <h3>{project.project_name}</h3> {/* Show the project name */}
 
-        {project.file ? (  // Check if a file exists
-          <p>📁 {project.file.split('/').pop()}</p>  // Extract the filename
-        ) : (
-          <p>📎 No file uploaded</p>  // If no file, show a placeholder
-        )}
-      </div>
-    ))
-  ) : (
-    <p>No projects added yet.</p>
-  )}
-</div>
 
 
       <div className="customer-orders">

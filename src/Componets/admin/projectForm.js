@@ -4,51 +4,53 @@ import './projectForm.css';
 
 function ProjectForm({ addProject }) {
   const [projectName, setProjectName] = useState('');
+  const [projectType, setProjectType] = useState('writing_assistance');
   const [inputType, setInputType] = useState('link');
   const [link, setLink] = useState('');
   const [file, setFile] = useState(null);
   const [errors, setErrors] = useState({});
-  const fileInputRef = useRef(null);  // 👈 Create a ref for file input
-
+  const fileInputRef = useRef(null);
+  
+  
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     if (!addProject) {
       console.error('addProject is not available in ProjectForm!');
       Swal.fire({ icon: 'error', title: 'Error', text: 'addProject function is missing!' });
       return;
     }
-
+  
     const newErrors = {};
     if (!projectName) newErrors.projectName = 'Project name is required';
     if (inputType === 'link' && !link) newErrors.link = 'Link is required';
     if (inputType === 'file' && !file) newErrors.file = 'File is required';
-
+  
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-
+  
     const formData = new FormData();
     formData.append("project_name", projectName);
-    
+    formData.append("project_type", projectType); // ✅ project_type is included
+  
     if (inputType === "link") {
       formData.append("link_url", link);
     } else if (inputType === "file" && file) {
       formData.append("file", file);
     }
-
+  
     addProject(formData); // Pass FormData to backend
-
+  
     Swal.fire({ icon: 'success', title: 'Success!', text: 'Project submitted successfully.' });
-
-    // Reset form inputs
+  
     setProjectName('');
     setLink('');
     setFile(null);
     setErrors({});
-
-    // Reset file input using ref
+  
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -69,6 +71,18 @@ function ProjectForm({ addProject }) {
           className="inputField"
         />
         {errors.projectName && <p className="error">{errors.projectName}</p>}
+
+        <select
+          value={projectType}
+          onChange={(e) => setProjectType(e.target.value)}
+          className="selectField"
+        >
+          <option value="writing_assistance">Writing Assistance</option>
+          <option value="editing_proofreading">Editing & Proofreading</option>
+          <option value="programming_assistance">Programming Assistance</option>
+          <option value="project_handling">Project Handling</option>
+          <option value="data_science_support">Data Science Support</option>
+        </select>
 
         <select
           value={inputType}
@@ -99,7 +113,7 @@ function ProjectForm({ addProject }) {
         ) : (
           <>
             <input
-              ref={fileInputRef}  // 👈 Attach the ref to file input
+              ref={fileInputRef}
               type="file"
               onChange={(e) => {
                 setFile(e.target.files[0]);

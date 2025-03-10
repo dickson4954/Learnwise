@@ -13,29 +13,57 @@ const defaultPrices = [
   { title: "Presentation Preparation.", prices: "Prices range from $20 to $50" }
 ];
 
+const projectTypes = [
+  "Writing Assistance",
+  "Editing & Proofreading",
+  "Programming Assistance",
+  "Project Handling",
+  "Data Science Support"
+];
+
 function PricingPage() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    // Fetch projects from Flask API
     fetch('http://127.0.0.1:5000/projects')
       .then((response) => response.json())
       .then((data) => {
-        console.log('Fetched projects:', data); // Debugging line
-        setProjects(data);  // Update state with projects from backend
+        console.log('Fetched projects:', data); // Log the response
+        setProjects(data);
       })
       .catch((error) => console.error('Error fetching projects:', error));
   }, []);
 
+  const groupProjectsByType = (projects) => {
+    return projects.reduce((acc, project) => {
+      const type = projectTypes.includes(project.project_type) ? project.project_type : 'Other';
+      if (!acc[type]) {
+        acc[type] = [];
+      }
+      acc[type].push(project);
+      return acc;
+    }, {});
+  };
+
+  const groupedProjects = groupProjectsByType(projects);
+
+  const chunkArray = (array, size) => {
+    const result = [];
+    for (let i = 0; i < array.length; i += size) {
+      result.push(array.slice(i, i + size));
+    }
+    return result;
+  };
+
+  const groupedTypes = chunkArray(Object.keys(groupedProjects), 2);
+
   return (
     <div>
-      {/* Image Section */}
       <div className="image-section"></div>
       <Link to="/">
         <button className="back-button">Back</button>
       </Link>
 
-      {/* Price Range Section */}
       <section className="price-range">
         <h2 className="title">Price Range</h2>
         <p className="subtitle">Below is a brief description of how our prices range....</p>
@@ -48,22 +76,25 @@ function PricingPage() {
           ))}
         </div>
 
-        {/* Display dynamically added projects */}
-        {projects.length > 0 && (
-          <div className="projects-list">
-            <h2 className="title">Added Projects</h2>
-            {projects.map((project, index) => (
-              <div key={index} className="project-card">
-                <h3>{project.name}</h3> {/* ✅ Ensure correct field name */}
-                {project.type === 'link' ? (
-                  <p>📎 <a href={project.content} target="_blank" rel="noopener noreferrer">{project.content}</a></p>
-                ) : (
-                  <p>📁 {project.content}</p>  // Show filename if it's a file
-                )}
+        {groupedTypes.map((types, index) => (
+          <div key={index} className="projects-row">
+            {types.map((type) => (
+              <div key={type} className="projects-list">
+                <h2 className="title">{type.replace(/_/g, ' ').toUpperCase()}</h2>
+                {groupedProjects[type].map((project, index) => (
+                  <div key={index} className="project-card">
+                    <h3>{project.project_name}</h3>
+                    {project.link_url ? (
+                      <p>📎 <a href={project.link_url} target="_blank" rel="noopener noreferrer">{project.link_url}</a></p>
+                    ) : (
+                      <p>📁 <a href={`http://127.0.0.1:5000/${project.file_url}`} download>{project.file_url.split('/').pop()}</a></p>
+                    )}
+                  </div>
+                ))}
               </div>
             ))}
           </div>
-        )}
+        ))}
       </section>
     </div>
   );
