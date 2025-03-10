@@ -10,13 +10,13 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
-  const [message, setMessage] = useState({ type: "", text: "" });
+  const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
-    setMessage({ type: "", text: "" });
+    setMessage(null);
   };
 
   const handleInputChange = (e) => {
@@ -35,6 +35,8 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage(null);
+
     const error = validateForm();
     if (error) {
       setMessage({ type: "error", text: error });
@@ -50,7 +52,6 @@ const LoginPage = () => {
     const requestData = isLogin
       ? { username: formData.username, password: formData.password }
       : {
-          fullName: formData.fullName,
           username: formData.username,
           email: formData.email,
           password: formData.password,
@@ -90,7 +91,7 @@ const LoginPage = () => {
         <div className="form">
           <form className={isLogin ? "login-form" : "register-form"} onSubmit={handleSubmit}>
             <h2>{isLogin ? "Login" : "Register"}</h2>
-            {message.text && <div className={`message ${message.type}`}>{message.text}</div>}
+            {message && <div className={`message ${message.type}`}>{message.text}</div>}
 
             {!isLogin && (
               <input
