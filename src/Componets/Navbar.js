@@ -57,13 +57,12 @@ function Navbar() {
      {/* Right Section: Order Button + Login Icon */}
 <div className="navbar-right">
   {/* Order Now Button */}
-  <Link to="/inquiry" className="order-button">Order Now →</Link>
-
-  {/* Login Icon */}
+  <Link to="/inquiry" className="order-button m-3 p-4">Order Now →</Link>
   <div className="login-button" onClick={toggleLoginForm}>
     <i className="fas fa-user"></i>
-  </div>
+  </div>  
 </div>
+
 
 
         {/* Login Form Overlay */}
