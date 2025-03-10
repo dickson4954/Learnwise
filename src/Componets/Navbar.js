@@ -19,7 +19,7 @@ function Navbar() {
         {/* Logo */}
         <Link to="/" className="navbar-brand">
           <img
-            src="https://i.pinimg.com/736x/77/e6/7d/77e67d6ffd4bc3c591663abfbd8329d5.jpg"
+            src="https://i.pinimg.com/736x/07/c4/17/07c41708e5bec327e1bce797ff3b6faf.jpg"
             alt="Learnwise"
             className="logo"
           />

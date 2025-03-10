@@ -22,11 +22,11 @@ const LandingPage = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="hero" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      <section className="hero" style={{ backgroundImage: `url('https://i.pinimg.com/736x/8b/ab/56/8bab56bde7fbb26b940d783dc89254d2.jpg')` }}>
         <div className="overlay"></div>
         <div className="hero-content">
           <h1>Welcome to Learnwise</h1>
-          <p>Your gateway to flexible freelance writing opportunities</p>
+          <p className='text-white'>Your gateway to flexible freelance writing opportunities</p>
         </div>
       </section>
 
