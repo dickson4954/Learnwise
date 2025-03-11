@@ -28,7 +28,7 @@ function PricingPage() {
     fetch('http://127.0.0.1:5000/projects')
       .then((response) => response.json())
       .then((data) => {
-        console.log('Fetched projects:', data); // Log the response
+        console.log('Fetched projects:', data);
         setProjects(data);
       })
       .catch((error) => console.error('Error fetching projects:', error));
@@ -56,6 +56,19 @@ function PricingPage() {
   };
 
   const groupedTypes = chunkArray(Object.keys(groupedProjects), 2);
+
+  const handleDownload = (url, filename) => {
+    fetch(url)
+      .then(response => response.blob())
+      .then(blob => {
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(link.href);
+      })
+      .catch(console.error);
+  };
 
   return (
     <div>
@@ -87,7 +100,9 @@ function PricingPage() {
                     {project.link_url ? (
                       <p>📎 <a href={project.link_url} target="_blank" rel="noopener noreferrer">{project.link_url}</a></p>
                     ) : (
-                      <p>📁 <a href={project.file_url} download>{project.file_url.split('/').pop()}</a></p>
+                      <p>📁 <button onClick={() => handleDownload(project.file_url, project.file_url.split('/').pop())}>
+                        Download {project.file_url.split('/').pop()}
+                      </button></p>
                     )}
                   </div>
                 ))}

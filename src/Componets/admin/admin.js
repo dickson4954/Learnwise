@@ -2,23 +2,19 @@ import React, { useState, useEffect } from 'react';
 import './admin.css';
 import { useNavigate } from 'react-router-dom';
 import ProjectForm from './projectForm';
-import Swal from 'sweetalert2'; // Import SweetAlert2
-
+import Swal from 'sweetalert2';
 
 function Admin() {
   const [showForm, setShowForm] = useState(false);
   const [orders, setOrders] = useState([]);
-  const [projects, setProjects] = useState([]); // Store projects from backend
   const [selectedOrder, setSelectedOrder] = useState(null);
   const navigate = useNavigate();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
 
   useEffect(() => {
     fetchOrders();
-    // fetchProjects(); // Fetch projects when component mounts
   }, []);
 
-  // Fetch orders
   const fetchOrders = async () => {
     try {
       const response = await fetch('http://127.0.0.1:5000/orders', {
@@ -40,28 +36,6 @@ function Admin() {
       console.error('Error fetching orders:', error);
     }
   };
-
-  // Fetch projects from backend
-  // const fetchProjects = async () => {
-  //   try {
-  //     const response = await fetch('http://127.0.0.1:5000/projects', {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
-  //       },
-  //     });
-
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       setProjects(data);
-  //     } else {
-  //       console.error('Failed to fetch projects');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error fetching projects:', error);
-  //   }
-  // };
 
   const toggleForm = () => {
     setShowForm((prev) => !prev);
@@ -89,13 +63,14 @@ function Admin() {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
-        body: formData, // Pass the FormData directly
+        body: formData,
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         console.log("Project added successfully:", data);
         Swal.fire({ icon: 'success', title: 'Success!', text: 'Project added successfully.' });
+        setShowForm(false); // Close the form after successful submission
       } else {
         const errorData = await response.json();
         console.error("Failed to add project:", errorData.error);
@@ -106,7 +81,7 @@ function Admin() {
       Swal.fire({ icon: 'error', title: 'Error', text: 'An error occurred while adding the project.' });
     }
   };
-  
+
   return (
     <div className="admin-dashboard">
       <div className="header-container">
@@ -122,12 +97,7 @@ function Admin() {
       <button className="add-project-button" onClick={toggleForm}>
         {showForm ? 'Close Form' : 'Add Project'}
       </button>
-      {showForm && <ProjectForm addProject={addProject} />}  {/* ✅ FIXED */}
-
-      {/* Display added projects */}
-     {/* Display added projects */}
-
-
+      {showForm && <ProjectForm addProject={addProject} />}
 
       <div className="customer-orders">
         <h2>Customer Orders</h2>

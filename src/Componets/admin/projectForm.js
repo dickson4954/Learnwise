@@ -1,131 +1,133 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import './projectForm.css';
+import './projectForm.css'; // Import the CSS file for styling
 
 function ProjectForm({ addProject }) {
   const [projectName, setProjectName] = useState('');
-  const [projectType, setProjectType] = useState('writing_assistance');
-  const [inputType, setInputType] = useState('link');
-  const [link, setLink] = useState('');
+  const [projectType, setProjectType] = useState('');
+  const [inputType, setInputType] = useState('file'); // 'file' or 'link'
   const [file, setFile] = useState(null);
-  const [errors, setErrors] = useState({});
-  const fileInputRef = useRef(null);
-  
-  
-  
+  const [linkUrl, setLinkUrl] = useState('');
+  const [error, setError] = useState('');
+
+  // Dropdown options for project type
+  const projectTypes = [
+    "Writing Assistance",
+    "Editing & Proofreading",
+    "Programming Assistance",
+    "Project Handling",
+    "Data Science Support",
+  ];
+
   const handleSubmit = (e) => {
     e.preventDefault();
-  
-    if (!addProject) {
-      console.error('addProject is not available in ProjectForm!');
-      Swal.fire({ icon: 'error', title: 'Error', text: 'addProject function is missing!' });
+
+    if (!projectName || !projectType) {
+      setError('Project name and type are required.');
       return;
     }
-  
-    const newErrors = {};
-    if (!projectName) newErrors.projectName = 'Project name is required';
-    if (inputType === 'link' && !link) newErrors.link = 'Link is required';
-    if (inputType === 'file' && !file) newErrors.file = 'File is required';
-  
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+
+    if (inputType === 'file' && !file) {
+      setError('Please upload a file.');
       return;
     }
-  
+
+    if (inputType === 'link' && !linkUrl) {
+      setError('Please provide a link.');
+      return;
+    }
+
     const formData = new FormData();
-    formData.append("project_name", projectName);
-    formData.append("project_type", projectType); // ✅ project_type is included
-  
-    if (inputType === "link") {
-      formData.append("link_url", link);
-    } else if (inputType === "file" && file) {
-      formData.append("file", file);
+    formData.append('project_name', projectName);
+    formData.append('project_type', projectType);
+
+    if (inputType === 'file' && file) {
+      formData.append('file', file);
+    } else if (inputType === 'link' && linkUrl) {
+      formData.append('link_url', linkUrl);
     }
-  
-    addProject(formData); // Pass FormData to backend
-  
-    Swal.fire({ icon: 'success', title: 'Success!', text: 'Project submitted successfully.' });
-  
-    setProjectName('');
-    setLink('');
-    setFile(null);
-    setErrors({});
-  
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
+
+    addProject(formData);
+    setError(''); // Clear error on successful submission
   };
 
   return (
     <div className="formContainer">
-      <h2 className="h2">Add Project</h2>
+      <h2 className="h2">Add New Project</h2>
+      {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Project Name"
-          value={projectName}
-          onChange={(e) => {
-            setProjectName(e.target.value);
-            setErrors((prev) => ({ ...prev, projectName: '' }));
-          }}
-          className="inputField"
-        />
-        {errors.projectName && <p className="error">{errors.projectName}</p>}
-
-        <select
-          value={projectType}
-          onChange={(e) => setProjectType(e.target.value)}
-          className="selectField"
-        >
-          <option value="writing_assistance">Writing Assistance</option>
-          <option value="editing_proofreading">Editing & Proofreading</option>
-          <option value="programming_assistance">Programming Assistance</option>
-          <option value="project_handling">Project Handling</option>
-          <option value="data_science_support">Data Science Support</option>
-        </select>
-
-        <select
-          value={inputType}
-          onChange={(e) => {
-            setInputType(e.target.value);
-            setErrors((prev) => ({ ...prev, link: '', file: '' }));
-          }}
-          className="selectField"
-        >
-          <option value="link">Link</option>
-          <option value="file">File</option>
-        </select>
-
-        {inputType === 'link' ? (
-          <>
+        <div>
+          <label>Project Name:</label>
+          <input
+            type="text"
+            value={projectName}
+            onChange={(e) => setProjectName(e.target.value)}
+            className="inputField"
+            required
+          />
+        </div>
+        <div>
+          <label>Project Type:</label>
+          <select
+            value={projectType}
+            onChange={(e) => setProjectType(e.target.value)}
+            className="selectField"
+            required
+          >
+            <option value="" disabled>Select a project type</option>
+            {projectTypes.map((type, index) => (
+              <option key={index} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label>Input Type:</label>
+          <div className="radioGroup">
+            <label>
+              <input
+                type="radio"
+                value="file"
+                checked={inputType === 'file'}
+                onChange={() => setInputType('file')}
+              />
+              Upload File
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="link"
+                checked={inputType === 'link'}
+                onChange={() => setInputType('link')}
+              />
+              Provide Link
+            </label>
+          </div>
+        </div>
+        {inputType === 'file' ? (
+          <div>
+            <label>Upload File:</label>
             <input
-              type="text"
-              placeholder="Paste Link"
-              value={link}
-              onChange={(e) => {
-                setLink(e.target.value);
-                setErrors((prev) => ({ ...prev, link: '' }));
-              }}
-              className="inputField"
-            />
-            {errors.link && <p className="error">{errors.link}</p>}
-          </>
-        ) : (
-          <>
-            <input
-              ref={fileInputRef}
               type="file"
-              onChange={(e) => {
-                setFile(e.target.files[0]);
-                setErrors((prev) => ({ ...prev, file: '' }));
-              }}
+              onChange={(e) => setFile(e.target.files[0])}
               className="fileInput"
+              required
             />
-            {errors.file && <p className="error">{errors.file}</p>}
-          </>
+          </div>
+        ) : (
+          <div>
+            <label>Link URL:</label>
+            <input
+              type="url"
+              value={linkUrl}
+              onChange={(e) => setLinkUrl(e.target.value)}
+              className="inputField"
+              required
+            />
+          </div>
         )}
-
-        <button type="submit" className="submitButton">Submit</button>
+        <button type="submit" className="submitButton">Add Project</button>
       </form>
     </div>
   );
