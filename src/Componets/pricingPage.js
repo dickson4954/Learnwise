@@ -87,7 +87,7 @@ function PricingPage() {
                     {project.link_url ? (
                       <p>📎 <a href={project.link_url} target="_blank" rel="noopener noreferrer">{project.link_url}</a></p>
                     ) : (
-                      <p>📁 <a href={`http://127.0.0.1:5000/${project.file_url}`} download>{project.file_url.split('/').pop()}</a></p>
+                      <p>📁 <a href={project.file_url} download>{project.file_url.split('/').pop()}</a></p>
                     )}
                   </div>
                 ))}
