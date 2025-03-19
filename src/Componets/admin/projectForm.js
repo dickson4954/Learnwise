@@ -19,6 +19,19 @@ function ProjectForm({ addProject }) {
     "Data Science Support",
   ];
 
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    const validFileTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']; // Add other MIME types as needed
+
+    if (selectedFile && !validFileTypes.includes(selectedFile.type)) {
+      setError('Please upload a valid file (PDF or DOCX).');
+      setFile(null); // Clear the file state
+    } else {
+      setFile(selectedFile);
+      setError(''); // Clear any previous error
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -110,7 +123,7 @@ function ProjectForm({ addProject }) {
             <label>Upload File:</label>
             <input
               type="file"
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={handleFileChange}
               className="fileInput"
               required
             />

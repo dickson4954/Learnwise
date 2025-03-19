@@ -1,14 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ContactPage.css";
 import Navbar from './Navbar'; 
 import Footer from './Footer';
-import { Link } from 'react-router-dom'; // Import Link
-
+import { Link } from 'react-router-dom';
+import axios from 'axios'; // Import Axios
 
 const ContactPage = () => {
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:5000/send_email', formData);
+      alert(response.data.message);
+    } catch (error) {
+      alert('Failed to send email. Please try again later.');
+    }
+  };
+
   return (
     <>
-     <header className="landing-header">
+      <header className="landing-header">
         <Navbar />
       </header>
       {/* Top Section */}
@@ -56,13 +81,11 @@ const ContactPage = () => {
             <div className="social-icons">
               <span className="icon">📷</span>
               <img 
-              src="https://i.pinimg.com/736x/4e/95/26/4e95267bcf1cc4ce078755e85e388add.jpg"
-              alt="Instagram Logo"
-              className=" instagram-logo"
-              style={{ height: '70px', width: '70px' }}
-
+                src="https://i.pinimg.com/736x/4e/95/26/4e95267bcf1cc4ce078755e85e388add.jpg"
+                alt="Instagram Logo"
+                className="instagram-logo"
+                style={{ height: '70px', width: '70px' }}
               />
-
               <span className="icon">🔗</span>
             </div>
           </div>
@@ -70,29 +93,55 @@ const ContactPage = () => {
           {/* Right Side - Contact Form */}
           <div className="right">
             <h4>Send us an e-mail and we will get back to you as soon as possible</h4>
-            <form className="contact-form">
+            <form className="contact-form" onSubmit={handleSubmit}>
               <div className="input-group">
-                <input type="text" className="input-half" placeholder="First name" />
-                <input type="text" className="input-half" placeholder="Last name" />
+                <input 
+                  type="text" 
+                  className="input-half" 
+                  placeholder="First name" 
+                  name="first_name"
+                  value={formData.first_name}
+                  onChange={handleChange}
+                  required
+                />
+                <input 
+                  type="text" 
+                  className="input-half" 
+                  placeholder="Last name" 
+                  name="last_name"
+                  value={formData.last_name}
+                  onChange={handleChange}
+                  required
+                />
               </div>
-              <input type="email" className="input-full" placeholder="Enter email address" />
-              <textarea className="input-full" placeholder="Enter your message"></textarea>
+              <input 
+                type="email" 
+                className="input-full" 
+                placeholder="Enter email address" 
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+              <textarea 
+                className="input-full" 
+                placeholder="Enter your message" 
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+              ></textarea>
               <button type="submit" className="send-button">SEND MESSAGE</button>
-              
             </form>
-            
           </div>
         </div>
       </div>
       <div className="make-order-section">
-      <Link to="/inquiry" className="order-button">MAKE YOUR ORDER</Link>
-
-</div>
-<Footer /> 
-
+        <Link to="/inquiry" className="order-button">MAKE YOUR ORDER</Link>
+      </div>
+      <Footer />
     </>
   );
 };
 
 export default ContactPage;
-

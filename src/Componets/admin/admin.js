@@ -82,6 +82,19 @@ function Admin() {
     }
   };
 
+  const handleDownload = (url, filename) => {
+    fetch(url)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(link.href);
+      })
+      .catch(console.error);
+  };
+
   return (
     <div className="admin-dashboard">
       <div className="header-container">
@@ -113,7 +126,7 @@ function Admin() {
             </tr>
           </thead>
           <tbody>
-            {orders.map(order => (
+            {orders.map((order) => (
               <tr key={order.id}>
                 <td>{order.name}</td>
                 <td>{order.email}</td>
@@ -141,16 +154,14 @@ function Admin() {
             <p><strong>Expected Duration:</strong> {selectedOrder.expected_duration}</p>
             <p><strong>Budget:</strong> {selectedOrder.project_budget}</p>
 
-            {selectedOrder.file_url && (
+            {selectedOrder.link_url ? (
+              <p>📎 <a a href={selectedOrder.link_url} target="_blank" rel="noopener noreferrer">{selectedOrder.link_url}</a></p>
+            ) : (
               <p>
                 <strong>File:</strong>{' '}
-                <a 
-                  href={selectedOrder.file_url.startsWith('http') ? selectedOrder.file_url : `http://127.0.0.1:5000/${selectedOrder.file_url}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
+                <button onClick={() => handleDownload(selectedOrder.file_url, selectedOrder.file_url.split('/').pop())}>
                   Download File
-                </a>
+                </button>
               </p>
             )}
 
