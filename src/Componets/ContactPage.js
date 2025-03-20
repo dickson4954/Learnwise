@@ -4,7 +4,9 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faInstagram, faTwitter, faTiktok, faWhatsapp, faSnapchat } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +16,6 @@ const ContactPage = () => {
     message: ''
   });
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -23,11 +24,10 @@ const ContactPage = () => {
     });
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Sending form data:", formData); // Log form data
+      console.log("Sending form data:", formData);
       const response = await axios.post('http://127.0.0.1:5000/send_email', formData);
       alert(response.data.message);
       setFormData({
@@ -37,48 +37,51 @@ const ContactPage = () => {
         message: ''
       })
     } catch (error) {
-      console.error("Error sending email:", error); // Log the error
+      console.error("Error sending email:", error);
       alert('Failed to send email. Please try again later.');
     }
   };
-
 
   return (
     <>
       <header className="landing-header">
         <Navbar />
       </header>
+
       {/* Top Section */}
       <div className="contact-top">
         <h4 className="contact-header">Our Contact Details</h4>
         <h2 className="contact-title">Get In-Touch for Any Enquiries</h2>
         <p className="contact-subtitle">
-          We have multiple channels you can use to have your message reach our support team as shown below;
+          We have multiple channels you can use to reach our support team as shown below;
         </p>
       </div>
 
-
-      {/* Contact Box Positioned Between Sections */}
+      {/* Contact Box */}
       <div className="contact-container">
         <div className="contact-details">
+          {/* Email */}
           <div className="contact-item">
-            <span className="contact-icon">📬</span>
+            <FontAwesomeIcon icon={faEnvelope} size="2x" style={{ color: "#D44638" }} />
             <h3 className="contact-item-title">Email Address</h3>
-            <p className="contact-item-text">info@tracyscripts.com</p>
+            <p className="contact-item-text">info@Learnwise.com</p>
           </div>
+
+          {/* Phone */}
           <div className="contact-item">
-            <span className="contact-icon">📞</span>
+            <FontAwesomeIcon icon={faPhone} size="2x" style={{ color: "#25D366" }} />
             <h3 className="contact-item-title">Phone Number</h3>
             <p className="contact-item-text">+1 (985) 328 - 2671</p>
           </div>
+
+          {/* Social Media */}
           <div className="contact-item">
-            <span className="contact-icon">🔗</span>
+            <FontAwesomeIcon icon={faSnapchat} size="2x" style={{ color: "#FFFC00" }} />
             <h3 className="contact-item-title">Social Media</h3>
             <p className="contact-item-text">Instagram || Snapchat</p>
           </div>
         </div>
       </div>
-
 
       {/* Let's Talk Section */}
       <div className="lets-talk">
@@ -88,22 +91,24 @@ const ContactPage = () => {
             <div className="divider"></div>
             <h2>Let's talk</h2>
             <div className="divider"></div>
+
             <h3>Through WhatsApp</h3>
             <button className="whatsapp-button">WHATSAPP CHAT</button>
+
             <div className="divider"></div>
-            <h3>Follow us</h3>
-            <div className="social-icons">
-              <span className="icon">📷</span>
-              <img
-                src="https://i.pinimg.com/736x/4e/95/26/4e95267bcf1cc4ce078755e85e388add.jpg"
-                alt="Instagram Logo"
-                className="instagram-logo"
-                style={{ height: '70px', width: '70px' }}
-              />
-              <span className="icon">🔗</span>
+            {/* Social Media Icons */}
+            <div className="d-flex flex-column bg-orange py-4">
+              <h5 className="text-center mb-3">Follow us on</h5>
+              <div className="d-flex justify-content-center">
+                <FontAwesomeIcon icon={faFacebook} size="2x" style={{ color: "#1877F2", margin: "0 10px" }} />
+                <FontAwesomeIcon icon={faInstagram} size="2x" style={{ color: "#E4405F", margin: "0 10px" }} />
+                <FontAwesomeIcon icon={faTwitter} size="2x" style={{ color: "#1DA1F2", margin: "0 10px" }} />
+                <FontAwesomeIcon icon={faTiktok} size="2x" style={{ color: "#000000", margin: "0 10px" }} />
+                <FontAwesomeIcon icon={faSnapchat} size="2x" style={{ color: "#FFFC00", margin: "0 10px" }} />
+                <FontAwesomeIcon icon={faWhatsapp} size="2x" style={{ color: "#25D366", margin: "0 10px" }} />
+              </div>
             </div>
           </div>
-
 
           {/* Right Side - Contact Form */}
           <div className="right">
@@ -151,13 +156,15 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Order Button */}
       <div className="make-order-section">
         <Link to="/inquiry" className="order-button">MAKE YOUR ORDER</Link>
       </div>
+
       <Footer />
     </>
   );
 };
-
 
 export default ContactPage;
