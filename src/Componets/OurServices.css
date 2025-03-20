@@ -1,11 +1,14 @@
 .our-services {
-  padding: 60px 10%;
+  padding: 60px 5%;
   background-color: #f9f9f9;
 }
 
 .our-services-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .title {
@@ -15,6 +18,7 @@
   border-left: 4px solid #007bff;
   padding-left: 10px;
   margin-bottom: 15px;
+  text-align: left;
 }
 
 .subtitle {
@@ -25,30 +29,35 @@
 
 .content {
   display: flex;
-  gap: 40px; /* Space between image and services */
+  flex-wrap: wrap; /* Ensures content wraps on smaller screens */
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
 }
 
 .image-container {
-  flex: 1; /* Takes up half the width */
-  max-height: 800px; /* Set a max height for the image */
-  overflow: hidden; /* Ensures the image doesn't overflow */
+  flex: 1;
+  max-width: 500px; /* Restricts max width on larger screens */
+  width: 100%;
   display: flex;
-  align-items: center; /* Centers the image vertically */
-  justify-content: center; /* Centers the image horizontally */
+  align-items: center;
+  justify-content: center;
 }
 
 .services-image {
   width: 100%;
-  height: 100%; /* Ensures the image fills the container */
-  object-fit: cover; /* Maintains aspect ratio */
-  border-radius: 10px; /* Optional: Adds rounded corners */
+  height: auto;
+  max-height: 400px; /* Prevents large images from breaking layout */
+  object-fit: contain; /* Ensures the whole image is visible */
+  border-radius: 10px;
 }
 
 .services-list {
-  flex: 1; /* Takes up half the width */
+  flex: 2;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two columns for services */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
   gap: 20px;
+  width: 100%;
 }
 
 .service-card {
@@ -56,6 +65,7 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
 
 .service-card h3 {
@@ -67,4 +77,34 @@
 .service-card p {
   font-size: 1rem;
   color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-container {
+    max-width: 100%;
+  }
+
+  .services-list {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusts columns for smaller screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .services-list {
+    grid-template-columns: 1fr; /* Stacks services in one column */
+  }
+
+  .service-card {
+    padding: 15px;
+  }
 }
