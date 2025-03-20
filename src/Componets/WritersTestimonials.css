@@ -16,12 +16,13 @@
     color: #555;
     margin-bottom: 40px;
 }
+
 .testimonials-container {
-    display: flex;           /* Enables horizontal alignment */
-    justify-content: space-between; /* Spreads them evenly */
-    align-items: stretch;    /* Ensures all cards have the same height */
-    gap: 20px;               /* Adds space between the cards */
-    flex-wrap: nowrap;       /* ✅ Prevents wrapping to the next line */
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    flex-wrap: wrap; /* ✅ Allows testimonials to wrap on smaller screens */
 }
 
 /* Testimonial card design */
@@ -30,10 +31,10 @@
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 30%;  /* ✅ Ensures each card takes exactly one-third of the space */
+    width: 30%; /* ✅ Default for larger screens */
+    min-width: 250px;
     text-align: center;
     position: relative;
-    min-width: 250px; /* ✅ Ensures they don’t shrink too much */
 }
 
 /* Image positioning */
@@ -59,4 +60,16 @@
     font-weight: bold;
     color: #222;
     margin-top: 15px;
+}
+
+/* ✅ Responsive Design for Small Screens */
+@media (max-width: 768px) {
+    .testimonials-container {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center;
+    }
+
+    .testimonial-card {
+        width: 90%; /* Make cards take more space */
+    }
 }

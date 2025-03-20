@@ -1,159 +1,158 @@
 /* Navbar Styling */
 .navbar {
-    background-color: #ffffff; /* White background */
-    padding: 10px 0;
-    width: 100vw; /* Full width */
+    background-color: #ffffff;
+    padding: 5px 0;
+    width: 100%;
+    height: 60px; /* Fixed height */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed; /* Stick to top */
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
 }
 
-/* Navbar Container */
+/* Flex container to align all items properly */
 .navbar .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 90%; /* Keep some margin from edges */
+    width: 95%;
     margin: 0 auto;
+    height: 100%; /* Ensuring it fits within 60px */
 }
 
 /* Logo */
 .logo {
-    width: 80px; /* Adjust logo size */
-    height: 50px;
+    width: 45px;
+    height: auto;
+    display: block;
+    flex-shrink: 0;
 }
 
-/* Centering Navbar Links */
-.navbar-collapse {
+/* Navbar Menu (Centered) */
+.navbar-menu {
     flex-grow: 1;
     display: flex;
     justify-content: center;
-}
-
-/* Navbar Items */
-.navbar-nav {
-    display: flex;
-    gap: 25px; /* More spacing */
     align-items: center;
 }
 
-.navbar-nav .nav-item {
+/* Navbar Navigation */
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px; /* Space between links */
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-/* Navbar Link Styling */
 .navbar-nav .nav-link {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     color: #000;
     text-transform: capitalize;
     transition: color 0.3s ease;
-    padding: 8px 12px;
+    padding: 6px 12px;
+    white-space: nowrap;
 }
 
 .navbar-nav .nav-link:hover {
-    color: #007bff; /* Highlight on hover */
+    color: #007bff;
 }
+
+/* Navbar Right Section */
 .navbar-right {
     display: flex;
     align-items: center;
-    height: 100%; 
+    gap: 15px;
+    height: 100%;
 }
 
+/* Order Button */
 .order-button {
-    background-color: #0099cc;
-    color: white;
-    /* padding: 8px 16px; */
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 10px; /* Match navbar height */
+    height: 40px;
+    padding: 5px 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    white-space: nowrap;
     line-height: normal;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
     position: relative;
+    top: -11px; /* Slight adjustment upwards */
 }
+
 
 .order-button:hover {
-    background-color: #138496;
+    background-color: #0056b3;
 }
 
-/* Navbar.css */
-.login-icon {
-    cursor: pointer;
-    margin-left: auto; /* Push the icon to the far right */
-    padding: 10px;
-    font-size: 1.5rem;
-    color: #fff; /* Ensure the icon is visible */
-    display: flex; /* Ensure it takes up space */
-    align-items: center; /* Center the icon vertically */
-  }
-  .login-form-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Ensure it's above other content */
-  }
-  
-  .login-form-overlay .login-page {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-  }
-
-/* Responsive Styling */
-@media (max-width: 992px) {
-    .navbar-collapse {
-        justify-content: center;
-    }
-    
-    .navbar-nav {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
-}
-/* Order button */
-.order-button {
-    background-color: #0099cc;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  /* Boxed Login Icon */
-  .login-button {
+/* Login Button */
+.login-button {
     width: 40px;
     height: 40px;
-    border: 1px solid #333;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
+    border: 1px solid #333;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 14px;
     color: #333;
     transition: background 0.3s ease;
-  }
-  
-  .login-button:hover {
+}
+
+.login-button:hover {
     background: #f0f0f0;
-  }
-  
+}
 
+/* Menu Toggle (Mobile) */
+.menu-toggle {
+    display: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
 
+/* Responsive for Tablets and Mobile */
+@media (max-width: 992px) {
+    .navbar .container {
+        padding: 5px 8px;
+    }
+
+    .navbar-menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        background: white;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+    }
+
+    .navbar-menu.active {
+        display: flex;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./ContactPage.css";
-import Navbar from './Navbar'; 
+import Navbar from './Navbar';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
+
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const ContactPage = () => {
     message: ''
   });
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -21,15 +23,25 @@ const ContactPage = () => {
     });
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/send_email', formData);
+      console.log("Sending form data:", formData); // Log form data
+      const response = await axios.post('http://127.0.0.1:5000/send_email', formData);
       alert(response.data.message);
+      setFormData({
+        first_name: '',
+        last_name: '',
+        email: '',
+        message: ''
+      })
     } catch (error) {
+      console.error("Error sending email:", error); // Log the error
       alert('Failed to send email. Please try again later.');
     }
   };
+
 
   return (
     <>
@@ -44,6 +56,7 @@ const ContactPage = () => {
           We have multiple channels you can use to have your message reach our support team as shown below;
         </p>
       </div>
+
 
       {/* Contact Box Positioned Between Sections */}
       <div className="contact-container">
@@ -66,6 +79,7 @@ const ContactPage = () => {
         </div>
       </div>
 
+
       {/* Let's Talk Section */}
       <div className="lets-talk">
         <div className="container">
@@ -80,7 +94,7 @@ const ContactPage = () => {
             <h3>Follow us</h3>
             <div className="social-icons">
               <span className="icon">📷</span>
-              <img 
+              <img
                 src="https://i.pinimg.com/736x/4e/95/26/4e95267bcf1cc4ce078755e85e388add.jpg"
                 alt="Instagram Logo"
                 className="instagram-logo"
@@ -90,42 +104,43 @@ const ContactPage = () => {
             </div>
           </div>
 
+
           {/* Right Side - Contact Form */}
           <div className="right">
             <h4>Send us an e-mail and we will get back to you as soon as possible</h4>
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="input-group">
-                <input 
-                  type="text" 
-                  className="input-half" 
-                  placeholder="First name" 
+                <input
+                  type="text"
+                  className="input-half"
+                  placeholder="First name"
                   name="first_name"
                   value={formData.first_name}
                   onChange={handleChange}
                   required
                 />
-                <input 
-                  type="text" 
-                  className="input-half" 
-                  placeholder="Last name" 
+                <input
+                  type="text"
+                  className="input-half"
+                  placeholder="Last name"
                   name="last_name"
                   value={formData.last_name}
                   onChange={handleChange}
                   required
                 />
               </div>
-              <input 
-                type="email" 
-                className="input-full" 
-                placeholder="Enter email address" 
+              <input
+                type="email"
+                className="input-full"
+                placeholder="Enter email address"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
               />
-              <textarea 
-                className="input-full" 
-                placeholder="Enter your message" 
+              <textarea
+                className="input-full"
+                placeholder="Enter your message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
@@ -143,5 +158,6 @@ const ContactPage = () => {
     </>
   );
 };
+
 
 export default ContactPage;

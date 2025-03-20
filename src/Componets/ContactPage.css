@@ -3,19 +3,17 @@
     background-color: #4F8C99;
     color: white;
     text-align: center;
-    padding: 120px 20px;  /* Increased padding to make it bigger */
-    min-height: 400px;  /* Ensures it takes up more vertical space */
+    padding: 120px 20px;
+    min-height: 400px;
     position: relative;
     z-index: 1;
 }
-
-
 
 /* Contact Details Box */
 .contact-container {
     display: flex;
     justify-content: center;
-    margin-top: -40px; /* Overlap effect */
+    margin-top: -40px;
     position: relative;
     z-index: 2;
 }
@@ -64,6 +62,7 @@
         padding: 30px;
     }
 }
+
 .lets-talk {
     padding: 50px 0;
     background-color: #fff;
@@ -71,15 +70,15 @@
 
 .container {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     max-width: 1200px;
     margin: auto;
     gap: 50px;
 }
 
 .left {
-    width: 40%;
+    width: 100%;
     text-align: center;
 }
 
@@ -99,9 +98,6 @@
     background-color: #1dbf73;
     color: #fff;
     padding: 12px 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
@@ -131,7 +127,7 @@
 }
 
 .right {
-    width: 55%;
+    width: 100%;
     background-color: #f8f8f8;
     padding: 40px;
     border-radius: 10px;
@@ -141,15 +137,18 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 100%;
 }
 
 .input-group {
     display: flex;
+    flex-direction: column;
     gap: 15px;
+    width: 100%;
 }
 
 .input-half {
-    flex: 1;
+    width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -184,13 +183,14 @@ textarea.input-full {
 .send-button:hover {
     background-color: #17a463;
 }
+
 .make-order-section {
     width: 100%;
-    background-color: #effafa; /* Match the light blue background */
+    background-color: #effafa;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 0; /* Adjust padding for spacing */
+    padding: 40px 0;
 }
 
 .make-order-button {
