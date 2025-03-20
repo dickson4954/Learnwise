@@ -3,7 +3,7 @@ import "./ContactPage.css";
 import Navbar from './Navbar'; 
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -24,9 +24,17 @@ const ContactPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/send_email', formData);
+      console.log("Sending form data:", formData); // Log form data
+      const response = await axios.post('http://127.0.0.1:5000/send_email', formData);
       alert(response.data.message);
+      setFormData({
+        first_name: '',
+        last_name: '',
+        email: '',
+        message: ''
+      })
     } catch (error) {
+      console.error("Error sending email:", error); // Log the error
       alert('Failed to send email. Please try again later.');
     }
   };
