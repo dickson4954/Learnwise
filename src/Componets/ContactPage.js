@@ -4,12 +4,9 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-<<<<<<< HEAD
-=======
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram, faTwitter, faTiktok, faWhatsapp, faSnapchat } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
->>>>>>> e409198c3a416d9ff55f10bbb21864f760c225bf
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -30,11 +27,7 @@ const ContactPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-<<<<<<< HEAD
-      console.log("Sending form data:", formData); // Log form data
-=======
       console.log("Sending form data:", formData);
->>>>>>> e409198c3a416d9ff55f10bbb21864f760c225bf
       const response = await axios.post('http://127.0.0.1:5000/send_email', formData);
       alert(response.data.message);
       setFormData({
@@ -44,11 +37,7 @@ const ContactPage = () => {
         message: ''
       })
     } catch (error) {
-<<<<<<< HEAD
-      console.error("Error sending email:", error); // Log the error
-=======
       console.error("Error sending email:", error);
->>>>>>> e409198c3a416d9ff55f10bbb21864f760c225bf
       alert('Failed to send email. Please try again later.');
     }
   };

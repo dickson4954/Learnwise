@@ -85,11 +85,11 @@ function Inquiry() {
     formDataToSend.append('phone', formData.phone);
     formDataToSend.append('project_name', formData.projectName);
     formDataToSend.append('project_description', formData.projectDescription);
+    formDataToSend.append('link_url', formData.linkUrl);
     formDataToSend.append('expected_duration', formData.expectedDuration);
-    formDataToSend.append('project_budget', formData.budget); // Only the number
-    formDataToSend.append('currency', formData.currency); // Send currency separately
-    formDataToSend.append('link_url', formData.linkUrl); // Add link URL
-
+    formDataToSend.append('currency', formData.currency);
+    formDataToSend.append('project_budget', formData.budget); 
+    
     if (inputType === 'file' && formData.file) {
       formDataToSend.append('file', formData.file);
     }
