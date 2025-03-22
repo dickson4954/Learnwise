@@ -14,7 +14,7 @@ function Inquiry() {
     file: null,
     linkUrl: '', // New field for link URL
     expectedDuration: '',
-    budget: '',
+    project_budget: '',
     currency: 'USD', // Default currency
   });
 
@@ -30,34 +30,41 @@ function Inquiry() {
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    const validFileTypes = [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    ]; // Add other MIME types as needed
-
-    if (selectedFile && !validFileTypes.includes(selectedFile.type)) {
+  
+    if (!selectedFile) return;
+  
+    const validFileExtensions = ['pdf', 'doc', 'docx'];
+    const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
+  
+    if (!validFileExtensions.includes(fileExtension)) {
       Swal.fire({
         title: 'Invalid File Type!',
-        text: 'Please upload a valid file (PDF or DOCX).',
+        text: 'Only PDF and DOCX files are allowed.',
         icon: 'error',
         confirmButtonText: 'OK',
       });
-      setFormData({
-        ...formData,
-        file: null, // Clear the file state
-      });
-    } else {
-      setFormData({
-        ...formData,
-        file: selectedFile,
-      });
+      setFormData({ ...formData, file: null });
+      return;
     }
+  
+    if (selectedFile.size > 5 * 1024 * 1024) {
+      Swal.fire({
+        title: 'File Too Large!',
+        text: 'File size should be under 5MB.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+      setFormData({ ...formData, file: null });
+      return;
+    }
+  
+    setFormData({ ...formData, file: selectedFile });
   };
-
+  
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     // Validate that either a file or a link is provided
     if (inputType === 'file' && !formData.file) {
       Swal.fire({
@@ -68,7 +75,7 @@ function Inquiry() {
       });
       return;
     }
-
+  
     if (inputType === 'link' && !formData.linkUrl) {
       Swal.fire({
         title: 'Error!',
@@ -78,7 +85,8 @@ function Inquiry() {
       });
       return;
     }
-
+  
+    // Creating FormData to send
     const formDataToSend = new FormData();
     formDataToSend.append('name', formData.name);
     formDataToSend.append('email', formData.email);
@@ -88,33 +96,45 @@ function Inquiry() {
     formDataToSend.append('link_url', formData.linkUrl);
     formDataToSend.append('expected_duration', formData.expectedDuration);
     formDataToSend.append('currency', formData.currency);
-    formDataToSend.append('project_budget', formData.budget); 
-    
+    formDataToSend.append('project_budget', formData.project_budget); 
+  
+    // If a file is selected, append it
     if (inputType === 'file' && formData.file) {
       formDataToSend.append('file', formData.file);
     }
-
+  
+    // ✅ **Debugging: Log FormData Entries**
+    console.log("🚀 FormData being sent:");
+    for (let [key, value] of formDataToSend.entries()) {
+      if (key === "file") {
+        console.log(`${key}:`, value ? value.name : "No file attached");
+      } else {
+        console.log(`${key}:`, value);
+      }
+    }
+  
     try {
       const response = await fetch('http://127.0.0.1:5000/orders', {
         method: 'POST',
-        body: formDataToSend,
+        body: formDataToSend, 
       });
-
+  
       if (!response.ok) {
-        throw new Error('Failed to submit order');
+        const errorText = await response.text(); // Get error message from backend
+        throw new Error(errorText || 'Failed to submit order');
       }
-
+  
       const data = await response.json();
-      console.log('Order submitted:', data);
-
+      console.log('✅ Order submitted:', data);
+  
       Swal.fire({
         title: 'Order Submitted!',
         text: 'Your order has been placed successfully.',
         icon: 'success',
         confirmButtonText: 'OK',
       });
-
-      // Reset the form after successful submission
+  
+      // Reset the form
       setFormData({
         name: '',
         email: '',
@@ -124,20 +144,21 @@ function Inquiry() {
         file: null,
         linkUrl: '',
         expectedDuration: '',
-        budget: '',
+        project_budget: '',
         currency: 'USD',
       });
+  
     } catch (error) {
-      console.error('Error submitting order:', error);
+      console.error('❌ Error submitting order:', error.message);
       Swal.fire({
         title: 'Error!',
-        text: 'Failed to submit order. Please try again.',
+        text: error.message || 'Failed to submit order. Please try again.',
         icon: 'error',
         confirmButtonText: 'OK',
       });
     }
   };
-
+  
   return (
     <div
       className="inquiry-page"
@@ -284,25 +305,29 @@ function Inquiry() {
         <div className="budget-input-container">
           <label htmlFor="budget">Budget:</label>
           <div className="budget-wrapper">
-            <select
-              name="currency"
-              value={formData.currency}
-              onChange={handleChange}
-              className="currency-dropdown"
-            >
-              <option value="USD">USD</option>
-              <option value="GBP">GBP</option>
-              <option value="EUR">EUR</option>
-            </select>
-            <input
-              type="text"
-              id="budget"
-              name="budget"
-              value={formData.budget}
-              onChange={handleChange}
-              required
-              className="budget-input"
-            />
+          <select
+  name="currency"
+  value={formData.currency || "USD"}  // Default to USD if empty
+  onChange={handleChange}
+  className="currency-dropdown"
+>
+  <option value="USD">USD</option>
+  <option value="GBP">GBP</option>
+  <option value="EUR">EUR</option>
+</select>
+
+<input
+  type="number"
+  id="project_budget"
+  name="project_budget"
+  value={formData.project_budget}
+  onChange={handleChange}
+  required
+  className="budget-input"
+  min="1" // Ensures budget is at least 1
+/>
+
+
           </div>
         </div>
 
