@@ -28,7 +28,7 @@ const ContactPage = () => {
     e.preventDefault();
     try {
       console.log("Sending form data:", formData);
-      const response = await axios.post('http://127.0.0.1:5000/send_email', formData);
+      const response = await axios.post('https://learnwise-sever.onrender.com/send_email', formData);
       alert(response.data.message);
       setFormData({
         first_name: '',

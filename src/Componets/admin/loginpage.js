@@ -46,8 +46,8 @@ const LoginPage = () => {
     setLoading(true);
 
     const url = isLogin
-      ? "http://127.0.0.1:5000/auth/login"
-      : "http://127.0.0.1:5000/auth/signup";
+      ? "https://learnwise-sever.onrender.com/auth/login"
+      : "https://learnwise-sever.onrender.com/auth/signup";
 
     const requestData = isLogin
       ? { username: formData.username, password: formData.password }
