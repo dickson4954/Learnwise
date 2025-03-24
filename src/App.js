@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css'
+import { Routes, Route } from 'react-router-dom';  // ❌ No need for BrowserRouter here
+import './App.css';
 import LandingPage from './Componets/Landingpage';
 import Inquiry from './Componets/inquiry';
 import PricingPage from './Componets/pricingPage';
@@ -17,17 +17,14 @@ function App() {
   };
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/inquiry" element={<Inquiry />} />
-        <Route path="/pricing" element={<PricingPage projects={projects} />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/form" element={<ProjectForm addProject={addProject} />} /> 
-        {/* 👆 Ensure this line is present! */}
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/inquiry" element={<Inquiry />} />
+      <Route path="/pricing" element={<PricingPage projects={projects} />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/admin" element={<Admin />} />
+      <Route path="/form" element={<ProjectForm addProject={addProject} />} /> 
+    </Routes>
   );
 }
 
