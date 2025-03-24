@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/Learnwise/static/css/main.19330fe9.css",
+    "main.js": "/Learnwise/static/js/main.c42aba3d.js",
+    "static/js/488.b09a345a.chunk.js": "/Learnwise/static/js/488.b09a345a.chunk.js",
+    "static/media/gif": "/Learnwise/static/media/6c598b8cb38df244eda78f8eb2f6c425.f23f195671011f2cbbc4.gif",
+    "static/media/fa-solid-900.ttf": "/Learnwise/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
+    "static/media/fa-brands-400.ttf": "/Learnwise/static/media/fa-brands-400.1815e00441357e01619e.ttf",
+    "static/media/fa-solid-900.woff2": "/Learnwise/static/media/fa-solid-900.2463b90d9a316e4e5294.woff2",
+    "static/media/black.jpg": "/Learnwise/static/media/black.33f3099f9c5c3c9de166.jpg",
+    "static/media/fa-brands-400.woff2": "/Learnwise/static/media/fa-brands-400.c210719e60948b211a12.woff2",
+    "static/media/grad.jpg": "/Learnwise/static/media/grad.e4d92b70c61f1bf5fe5c.jpg",
+    "static/media/gradu.png": "/Learnwise/static/media/gradu.1a0f1a2994fdc055f162.png",
+    "static/media/fa-regular-400.ttf": "/Learnwise/static/media/fa-regular-400.914997e1bdfc990d0897.ttf",
+    "static/media/writer.jpg": "/Learnwise/static/media/writer.9ae70c57df1b8ec7ef38.jpg",
+    "static/media/success.jpg": "/Learnwise/static/media/success.01be8592de0d2b785e34.jpg",
+    "static/media/submit.jpg": "/Learnwise/static/media/submit.99307cae38d9593ef668.jpg",
+    "static/media/request.jpeg": "/Learnwise/static/media/request.55b5bed7d383d0f548ba.jpeg",
+    "static/media/lecturer1.jpg": "/Learnwise/static/media/lecturer1.7ff69fe3dfc00851c5a3.jpg",
+    "static/media/order.jpg": "/Learnwise/static/media/order.6841baec7f01bee72b79.jpg",
+    "static/media/freak.png": "/Learnwise/static/media/freak.344c0bc33c5f617a4aea.png",
+    "static/media/lecture3.jpg": "/Learnwise/static/media/lecture3.22b4f6b4dd5f3582ede2.jpg",
+    "static/media/fa-regular-400.woff2": "/Learnwise/static/media/fa-regular-400.89999bdf5d835c012025.woff2",
+    "static/media/lecturer2.jpg": "/Learnwise/static/media/lecturer2.f8cf7317aaebcc56c319.jpg",
+    "static/media/student.jpg": "/Learnwise/static/media/student.bfca427f5832f8cefdda.jpg",
+    "static/media/cashapp.png": "/Learnwise/static/media/cashapp.176895b73b125ea12486.png",
+    "static/media/paypal.png": "/Learnwise/static/media/paypal.b968747e21884755da0f.png",
+    "static/media/fa-v4compatibility.ttf": "/Learnwise/static/media/fa-v4compatibility.da94ef451f4969af06e6.ttf",
+    "static/media/logo.png": "/Learnwise/static/media/logo.d458a4f11743745b4eb1.png",
+    "static/media/smart.jpg": "/Learnwise/static/media/smart.060890287eab42d25575.jpg",
+    "static/media/fa-v4compatibility.woff2": "/Learnwise/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
+    "index.html": "/Learnwise/index.html",
+    "main.19330fe9.css.map": "/Learnwise/static/css/main.19330fe9.css.map",
+    "main.c42aba3d.js.map": "/Learnwise/static/js/main.c42aba3d.js.map",
+    "488.b09a345a.chunk.js.map": "/Learnwise/static/js/488.b09a345a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.19330fe9.css",
+    "static/js/main.c42aba3d.js"
+  ]
+}
