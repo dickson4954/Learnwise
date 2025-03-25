@@ -9,8 +9,8 @@ const defaultPrices = [
   { title: "Project Handling.", prices: "Prices range from $200 to $1000 per clients preferences" },
   { title: "Programming Assistance.", prices: "Prices range from $200 to $1000 per clients preferences" },
   { title: "Data Science Support.", prices: "Prices range from $100 to $1000 per clients preferences" },
-  { title: "Online Classes & Tutoring.", prices: "Prices range from $50 to $1000 per clients preferences" },
-  { title: "Presentation Preparation.", prices: "Prices range from $50 to $1000 per clients preferences" }
+  { title: "Academic Writing Assistance.", prices: "Prices range from $20 to $100 per clients preferences" },
+  { title: "Web Design & Development", prices: "Prices range from $200 to $1000 per clients preferences" }
 ];
 
 const projectTypes = [

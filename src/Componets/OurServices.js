@@ -9,8 +9,8 @@ const services = [
   { title: "Project Handling.", description: "Need support with academic projects? We assist with planning, research, and presentation, ensuring your work stands out." },
   { title: "Programming Assistance.", description: "Get help with coding challenges, algorithm development, and debugging across languages such as Python, Java, C++, and more." },
   { title: "Data Science Support.", description: "Master data analytics, visualization, and predictive modeling with expert guidance on tools like Python, R, and SQL." },
-  { title: "Online Classes & Tutoring.", description: "Stay on track and successfully complete your online courses with tailored guidance and support for quizzes, assignments, and exams." },
-  { title: "Presentation Preparation.", description: "Enhance your presentation skills with professionally designed slides and expert tips. PowerPoint, Video Presentations, etc." }
+  { title: "Academic Writing Assistance.", description: "Receive expert guidance on research papers, essays, reports, and more. Ensure clarity, coherence, and proper formatting to achieve top grades." },
+  { title: "Web Design & Development", description: "Get a stunning, responsive website tailored to your brand. We specialize in custom designs, seamless user experiences, and optimized performance to help you stand out online." }
 ];
 
 const OurServices = () => {
