@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Learnwise/static/css/main.19330fe9.css",
-    "main.js": "/Learnwise/static/js/main.be29e4d8.js",
+    "main.js": "/Learnwise/static/js/main.f3bd6597.js",
     "static/js/488.720cabd7.chunk.js": "/Learnwise/static/js/488.720cabd7.chunk.js",
     "static/media/gif": "/Learnwise/static/media/6c598b8cb38df244eda78f8eb2f6c425.f23f195671011f2cbbc4.gif",
     "static/media/fa-solid-900.ttf": "/Learnwise/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
@@ -31,11 +31,11 @@
     "static/media/fa-v4compatibility.woff2": "/Learnwise/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
     "index.html": "/Learnwise/index.html",
     "main.19330fe9.css.map": "/Learnwise/static/css/main.19330fe9.css.map",
-    "main.be29e4d8.js.map": "/Learnwise/static/js/main.be29e4d8.js.map",
+    "main.f3bd6597.js.map": "/Learnwise/static/js/main.f3bd6597.js.map",
     "488.720cabd7.chunk.js.map": "/Learnwise/static/js/488.720cabd7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.19330fe9.css",
-    "static/js/main.be29e4d8.js"
+    "static/js/main.f3bd6597.js"
   ]
 }
