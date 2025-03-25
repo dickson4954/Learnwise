@@ -5,8 +5,10 @@ import Footer from './Footer';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faInstagram, faTwitter, faTiktok, faWhatsapp, faSnapchat } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faInstagram, faWhatsapp, faSnapchat } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
+
+
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -71,7 +73,7 @@ const ContactPage = () => {
           <div className="contact-item">
             <FontAwesomeIcon icon={faPhone} size="2x" style={{ color: "#25D366" }} />
             <h3 className="contact-item-title">Phone Number</h3>
-            <p className="contact-item-text">+1 (985) 328 - 2671</p>
+            <p className="contact-item-text">+1 (646) 624 - 7498</p>
           </div>
 
           {/* Social Media */}
@@ -92,20 +94,31 @@ const ContactPage = () => {
             <h2>Let's talk</h2>
             <div className="divider"></div>
 
-            <h3>Through WhatsApp</h3>
-            <button className="whatsapp-button">WHATSAPP CHAT</button>
+            {/* WhatsApp Chat Button */}
+<h3>Through WhatsApp</h3>
+<a href="https://chat.whatsapp.com/GchSyD9ygFfGCcC57Jfuhz" target="_blank" rel="noopener noreferrer">
+  <button className="whatsapp-button">WHATSAPP CHAT</button>
+</a>
+
 
             <div className="divider"></div>
             {/* Social Media Icons */}
             <div className="d-flex flex-column bg-orange py-4">
               <h5 className="text-center mb-3">Follow us on</h5>
               <div className="d-flex justify-content-center">
-                <FontAwesomeIcon icon={faFacebook} size="2x" style={{ color: "#1877F2", margin: "0 10px" }} />
-                <FontAwesomeIcon icon={faInstagram} size="2x" style={{ color: "#E4405F", margin: "0 10px" }} />
-                <FontAwesomeIcon icon={faTwitter} size="2x" style={{ color: "#1DA1F2", margin: "0 10px" }} />
-                <FontAwesomeIcon icon={faTiktok} size="2x" style={{ color: "#000000", margin: "0 10px" }} />
-                <FontAwesomeIcon icon={faSnapchat} size="2x" style={{ color: "#FFFC00", margin: "0 10px" }} />
-                <FontAwesomeIcon icon={faWhatsapp} size="2x" style={{ color: "#25D366", margin: "0 10px" }} />
+              <a href="https://www.facebook.com/share/15HwhGMWhA/" className="me-3" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faFacebook} size="2x" style={{ color: "#1877F2", margin: "0 10px" }} />
+              </a>
+<a href="https://www.instagram.com/terry_writers1?igsh=MTdocHhzaDJ3d29leA==" target="_blank" rel="noopener noreferrer">
+    <FontAwesomeIcon icon={faInstagram} size="2x" style={{ color: "#E4405F", margin: "0 10px" }} />
+</a>
+<a href="https://www.snapchat.com/add/terrywrights?share_id=qvQWg1OKG48&locale=en-KE" target="_blank" rel="noopener noreferrer">
+      <FontAwesomeIcon icon={faSnapchat} size="2x" style={{ color: "#FFFC00", margin: "0 10px" }} />
+    </a>
+<a href="https://chat.whatsapp.com/GchSyD9ygFfGCcC57Jfuhz" className="ms-3" target="_blank" rel="noopener noreferrer">
+    <FontAwesomeIcon icon={faWhatsapp} size="2x" style={{ color: "#25D366", margin: "0 10px" }} />
+</a>
+
               </div>
             </div>
           </div>

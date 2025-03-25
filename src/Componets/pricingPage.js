@@ -3,14 +3,14 @@ import './pricingPage.css';
 import { Link } from 'react-router-dom';
 
 const defaultPrices = [
-  { title: "Writing - Assistance.", prices: "Prices range from $20 to $50" },
-  { title: "Editing and Proofreading.", prices: "Prices range from $20 to $50" },
-  { title: "Exam Preparations.", prices: "Prices range from $20 to $50" },
-  { title: "Project Handling.", prices: "Prices range from $20 to $50" },
-  { title: "Programming Assistance.", prices: "Prices range from $20 to $50" },
-  { title: "Data Science Support.", prices: "Prices range from $20 to $50" },
-  { title: "Online Classes & Tutoring.", prices: "Prices range from $20 to $50" },
-  { title: "Presentation Preparation.", prices: "Prices range from $20 to $50" }
+  { title: "Writing - Assistance.", prices: "Prices range from $20 to $50 per page"  },
+  { title: "Editing and Proofreading.", prices: "Prices range from $20 to $50 per clients preferences" },
+  { title: "Exam Preparations.", prices: "Prices range from $50 to $1000 per clients preferences" },
+  { title: "Project Handling.", prices: "Prices range from $200 to $1000 per clients preferences" },
+  { title: "Programming Assistance.", prices: "Prices range from $200 to $1000 per clients preferences" },
+  { title: "Data Science Support.", prices: "Prices range from $100 to $1000 per clients preferences" },
+  { title: "Online Classes & Tutoring.", prices: "Prices range from $50 to $1000 per clients preferences" },
+  { title: "Presentation Preparation.", prices: "Prices range from $50 to $1000 per clients preferences" }
 ];
 
 const projectTypes = [
