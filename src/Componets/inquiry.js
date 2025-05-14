@@ -114,10 +114,12 @@ function Inquiry() {
     }
   
     try {
-      const response = await fetch('https://learnwise-sever.onrender.com/orders', {
-        method: 'POST',
-        body: formDataToSend, 
-      });
+    const response = await fetch('https://backend.learnwisee.com/orders', {
+  method: 'POST',
+  body: formDataToSend, // FormData auto-sets content-type
+});
+
+
   
       if (!response.ok) {
         const errorText = await response.text(); // Get error message from backend

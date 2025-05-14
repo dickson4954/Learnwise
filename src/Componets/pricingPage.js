@@ -24,15 +24,15 @@ const projectTypes = [
 function PricingPage() {
   const [projects, setProjects] = useState([]);
 
-  useEffect(() => {
-    fetch('https://learnwise-sever.onrender.com/projects')
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Fetched projects:', data);
-        setProjects(data);
-      })
-      .catch((error) => console.error('Error fetching projects:', error));
-  }, []);
+ useEffect(() => {
+  fetch('https://backend.learnwisee.com/projects')
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Fetched projects:', data);
+      setProjects(data);
+    })
+    .catch((error) => console.error('Error fetching projects:', error));
+}, []);
 
   const groupProjectsByType = (projects) => {
     return projects.reduce((acc, project) => {
