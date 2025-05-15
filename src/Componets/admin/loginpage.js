@@ -46,8 +46,8 @@ const LoginPage = () => {
     setLoading(true);
 
     const url = isLogin
-      ? "http://learnwisee.com/backend/auth/login"
-      : "http://learnwisee.com/backend/auth/signup";
+      ? "https://learnwisee.com/backend/auth/login"
+      : "https://learnwisee.com/backend/auth/signup";
 
     const requestData = isLogin
       ? { username: formData.username, password: formData.password }

@@ -17,7 +17,7 @@ function Admin() {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch('http://learnwisee.com/backend/orders', {
+      const response = await fetch('https://learnwisee.com/backend/orders', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ function Admin() {
 
   const addProject = async (formData) => {
     try {
-      const response = await fetch('http://learnwisee.com/backend/projects', {
+      const response = await fetch('https://learnwisee.com/backend/projects', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
