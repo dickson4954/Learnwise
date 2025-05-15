@@ -114,7 +114,7 @@ function Inquiry() {
     }
   
     try {
-    const response = await fetch('https://backend.learnwisee.com/orders', {
+    const response = await fetch('http://learnwisee.com/backend/orders', {
   method: 'POST',
   body: formDataToSend, // FormData auto-sets content-type
 });

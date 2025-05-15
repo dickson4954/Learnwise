@@ -25,7 +25,7 @@ function PricingPage() {
   const [projects, setProjects] = useState([]);
 
  useEffect(() => {
-  fetch('https://backend.learnwisee.com/projects')
+  fetch('http://learnwisee.com/backend/projects')
     .then((response) => response.json())
     .then((data) => {
       console.log('Fetched projects:', data);
