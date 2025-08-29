@@ -114,10 +114,11 @@ function Inquiry() {
     }
   
     try {
-  const response = await fetch('https://learnwisee.com/orders', {
-  method: 'POST',
-  body: formDataToSend, // FormData auto-sets content-type
+const response = await fetch("https://learnwisee.com/backend/orders", {
+  method: "POST",
+  body: formDataToSend,
 });
+
 
 
   
