@@ -65,7 +65,7 @@ const LoginPage = () => {
     try {
       const response = await fetch(url, {
         method: "POST",
-        headers: { "Content-Type": "application/json" }, // FIXED: Removed extra quote
+        headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify(requestData),
       });
@@ -127,6 +127,13 @@ const LoginPage = () => {
               />
             )}
             <div className="password-input-container">
+              <button
+                type="button"
+                className="password-toggle left-toggle"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? "🙈" : "👁️"}
+              </button>
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password *"
@@ -134,15 +141,8 @@ const LoginPage = () => {
                 value={formData.password}
                 onChange={handleInputChange}
                 required
-                className="password-input"
+                className="password-input with-left-toggle"
               />
-              <button
-                type="button"
-                className="password-toggle"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? "🙈" : "👁️"}
-              </button>
             </div>
             <button type="submit" disabled={loading}>
               {loading ? "Processing..." : isLogin ? "Login" : "Create Account"}
