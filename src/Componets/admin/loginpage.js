@@ -45,11 +45,10 @@ const LoginPage = () => {
 
     setLoading(true);
 
-    const url = isLogin
-  ? "https://api.learnwisee.com/backend/auth/login"
-  : "https://api.learnwisee.com/backend/auth/signup";
-
-
+   const url = isLogin
+  ? "http://178.162.234.23:8000/backend/auth/login"
+  : "http://178.162.234.23:8000/backend/auth/signup";
+  
     const requestData = isLogin
       ? { username: formData.username, password: formData.password }
       : {
