@@ -50,9 +50,10 @@ const LoginPage = () => {
 
     setLoading(true);
 
+    // UPDATED: Use your server IP with port 8000
     const url = isLogin
-      ? "/backend/auth/login"
-      : "/backend/auth/signup";
+      ? "http://178.162.234.23:8000/backend/auth/login"
+      : "http://178.162.234.23:8000/backend/auth/signup";
 
     const requestData = isLogin
       ? { username: formData.username, password: formData.password }
