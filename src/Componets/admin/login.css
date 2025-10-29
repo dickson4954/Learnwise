@@ -29,20 +29,23 @@
     .form h2 {
       font-size: 24px;
       margin-bottom: 20px;
+      text-align: center;
+      color: #234666;
     }
     
     .form input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 14px;
       font-family: 'Poppins', sans-serif;
       background-color: #f9f9f9;
+      box-sizing: border-box;
     }
     
-    .form button {
+    .form button[type="submit"] {
       width: 100%;
       padding: 12px;
       background-color: #234666;
@@ -52,16 +55,23 @@
       font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      margin-top: 10px;
     }
-  /*   
-    .form button:hover {
+    
+    .form button[type="submit"]:hover {
       background-color: #445364;
-    } */
+    }
+    
+    .form button[type="submit"]:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
     
     .message {
       margin-top: 15px;
       font-size: 12px;
       color: #555;
+      text-align: center;
     }
     
     .message .toggle-btn {
@@ -71,74 +81,115 @@
       cursor: pointer;
       text-decoration: underline;
       font-size: 12px;
+      padding: 0;
+      margin: 0;
     }
     
     .message .toggle-btn:hover {
       color: #3f5063;
     }
+
+    /* Message styles */
+    .message.success {
+      color: #28a745;
+      background-color: #d4edda;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #c3e6cb;
+    }
+    
+    .message.error {
+      color: #dc3545;
+      background-color: #f8d7da;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #f5c6cb;
+    }
+    
+    /* Password input container */
     .password-input-container {
-  position: relative;
-  width: 100%;
-  margin-bottom: 15px;
-}
+      position: relative;
+      width: 100%;
+      margin: 10px 0;
+    }
+    
+    .password-input {
+      width: 100%;
+      padding: 12px 45px 12px 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
+      box-sizing: border-box;
+    }
+    
+    .password-input.with-left-toggle {
+      padding-left: 45px; /* Space for the left eye button */
+      padding-right: 12px; /* Regular right padding */
+    }
+    
+    .password-toggle {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 8px;
+      border-radius: 3px;
+      transition: background-color 0.2s;
+      z-index: 3; /* Higher than input */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+    }
+    
+    .password-toggle.left-toggle {
+      left: 5px;
+    }
+    
+    .password-toggle:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    .password-toggle:focus {
+      outline: none;
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Ensure the input field is clickable and typeable */
+    .password-input {
+      position: relative;
+      z-index: 2;
+    }
+    
+    /* Make sure the toggle button doesn't block input events */
+    .password-toggle {
+      pointer-events: auto;
+    }
+    
+    .password-input-container:focus-within {
+      border-color: #234666;
+    }
+    
+    .password-input:focus {
+      outline: none;
+      border-color: #234666;
+      box-shadow: 0 0 0 2px rgba(35, 70, 102, 0.1);
+    }
 
-.password-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  box-sizing: border-box;
-}
-
-.password-input.with-left-toggle {
-  padding-left: 45px; /* Space for the left eye button */
-}
-
-.password-toggle {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 5px 8px;
-  border-radius: 3px;
-  transition: background-color 0.2s;
-  z-index: 2;
-}
-
-.password-toggle.left-toggle {
-  left: 10px;
-}
-
-.password-toggle:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.password-toggle:focus {
-  outline: none;
-  background-color: rgba(0, 0, 0, 0.15);
-}
-
-/* Rest of your existing login.css styles */
-.login-page {
-  /* your existing styles */
-}
-
-.form {
-  /* your existing styles */
-}
-
-.login-form, .register-form {
-  /* your existing styles */
-}
-
-.form input[type="text"],
-.form input[type="email"],
-.form input[type="password"] {
-  /* your existing input styles */
-}
-
-
+    /* Responsive design */
+    @media (max-width: 480px) {
+      .login-page {
+        width: 90%;
+        margin: 0 auto;
+      }
+      
+      .form {
+        padding: 30px 20px;
+      }
+    }

@@ -127,13 +127,6 @@ const LoginPage = () => {
               />
             )}
             <div className="password-input-container">
-              <button
-                type="button"
-                className="password-toggle left-toggle"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? "🙈" : "👁️"}
-              </button>
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password *"
@@ -143,6 +136,13 @@ const LoginPage = () => {
                 required
                 className="password-input with-left-toggle"
               />
+              <button
+                type="button"
+                className="password-toggle left-toggle"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? "🙈" : "👁️"}
+              </button>
             </div>
             <button type="submit" disabled={loading}>
               {loading ? "Processing..." : isLogin ? "Login" : "Create Account"}
