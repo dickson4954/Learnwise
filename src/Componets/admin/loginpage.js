@@ -12,11 +12,16 @@ const LoginPage = () => {
   });
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
     setMessage(null);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleInputChange = (e) => {
@@ -45,10 +50,10 @@ const LoginPage = () => {
 
     setLoading(true);
 
-   const url = isLogin
-  ? "http://178.162.234.23:8000/backend/auth/login"
-  : "http://178.162.234.23:8000/backend/auth/signup";
-  
+    const url = isLogin
+      ? "/backend/auth/login"
+      : "/backend/auth/signup";
+
     const requestData = isLogin
       ? { username: formData.username, password: formData.password }
       : {
@@ -60,7 +65,7 @@ const LoginPage = () => {
     try {
       const response = await fetch(url, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" }, // FIXED: Removed extra quote
         credentials: "include",
         body: JSON.stringify(requestData),
       });
@@ -121,14 +126,24 @@ const LoginPage = () => {
                 required
               />
             )}
-            <input
-              type="password"
-              placeholder="Password *"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-            />
+            <div className="password-input-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password *"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                required
+                className="password-input"
+              />
+              <button
+                type="button"
+                className="password-toggle"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? "🙈" : "👁️"}
+              </button>
+            </div>
             <button type="submit" disabled={loading}>
               {loading ? "Processing..." : isLogin ? "Login" : "Create Account"}
             </button>

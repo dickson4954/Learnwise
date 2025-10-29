@@ -76,4 +76,42 @@
     .message .toggle-btn:hover {
       color: #3f5063;
     }
-    
+    .password-input-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.password-input {
+  width: 100%;
+  padding: 10px 45px 10px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 3px;
+  transition: background-color 0.2s;
+}
+
+.password-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.password-toggle:focus {
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+
