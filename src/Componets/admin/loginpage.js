@@ -50,10 +50,10 @@ const LoginPage = () => {
 
     setLoading(true);
 
-    // UPDATED: Use your server IP with port 8000
+    // Use HTTPS with your domain to avoid mixed content
     const url = isLogin
-      ? "http://178.162.234.23:8000/backend/auth/login"
-      : "http://178.162.234.23:8000/backend/auth/signup";
+      ? "https://learnwisee.com:8000/backend/auth/login"
+      : "https://learnwisee.com:8000/backend/auth/signup";
 
     const requestData = isLogin
       ? { username: formData.username, password: formData.password }
