@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
 import "./login.css";
 
 const LoginPage = () => {
@@ -50,10 +51,10 @@ const LoginPage = () => {
 
     setLoading(true);
 
-    // UPDATED URLs - Using your server IP
+    // USE RELATIVE URLs - This will work with reverse proxy
     const url = isLogin
-      ? "http://178.162.234.23:5000/backend/auth/login"
-      : "http://178.162.234.23:5000/backend/auth/signup";
+      ? "/backend/auth/login"
+      : "/backend/auth/signup";
     
     const requestData = isLogin
       ? { username: formData.username, password: formData.password }
@@ -142,7 +143,7 @@ const LoginPage = () => {
                 className="password-toggle left-toggle"
                 onClick={togglePasswordVisibility}
               >
-                {showPassword ? "🙈" : "👁️"}
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
             <button type="submit" disabled={loading}>
